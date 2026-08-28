@@ -1,0 +1,250 @@
+[gd_scene format=3 uid="uid://cxmegvdrwvi8j"]
+
+[ext_resource type="Theme" uid="uid://b7uxclx4y81u" path="res://assets/theme/main_theme.tres" id="1_1tfbf"]
+[ext_resource type="Script" uid="uid://cub5w4aal8htx" path="res://scenes/babel/book_overlay.gd" id="1_jfq7r"]
+[ext_resource type="Texture2D" uid="uid://cedtiwqslqxjv" path="res://assets/game/book.png" id="2_mipc1"]
+[ext_resource type="Texture2D" uid="uid://cbtp0hbn658bc" path="res://assets/game/shelf.png" id="3_btenm"]
+[ext_resource type="PackedScene" uid="uid://dfhglkmdsooq8" path="res://scenes/babel/book.tscn" id="4_x6clb"]
+[ext_resource type="Texture2D" uid="uid://dqeisfsm0ricb" path="res://assets/game/highlight.png" id="5_wlyd0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_btenm"]
+line_spacing = -2.0
+font_color = Color(0.4392157, 0.05882353, 0.08627451, 1)
+
+[node name="BookOverlay" type="Control" unique_id=1540440884 node_paths=PackedStringArray("shelf_root", "highlight", "book_container", "book_text", "page_count")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_1tfbf")
+script = ExtResource("1_jfq7r")
+shelf_root = NodePath("ShelfContainer/Shelf/VBoxContainer")
+highlight = NodePath("Highlight")
+book_container = NodePath("BookContainer")
+book_text = NodePath("BookContainer/Background/HBoxContainer/VBoxContainer/Text")
+page_count = NodePath("BookContainer/Background/HBoxContainer/VBoxContainer/PageCount")
+
+[node name="ShelfContainer" type="CenterContainer" parent="." unique_id=1132713331]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Shelf" type="TextureRect" parent="ShelfContainer" unique_id=434159362]
+layout_mode = 2
+texture = ExtResource("3_btenm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ShelfContainer/Shelf" unique_id=394611117]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopPad" type="Control" parent="ShelfContainer/Shelf/VBoxContainer" unique_id=1428412293]
+layout_mode = 2
+
+[node name="Row1" type="HBoxContainer" parent="ShelfContainer/Shelf/VBoxContainer" unique_id=23315119]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Book1" parent="ShelfContainer/Shelf/VBoxContainer/Row1" unique_id=924810045 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book2" parent="ShelfContainer/Shelf/VBoxContainer/Row1" unique_id=2044090667 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book3" parent="ShelfContainer/Shelf/VBoxContainer/Row1" unique_id=23986036 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book4" parent="ShelfContainer/Shelf/VBoxContainer/Row1" unique_id=29474239 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book5" parent="ShelfContainer/Shelf/VBoxContainer/Row1" unique_id=1050195713 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book6" parent="ShelfContainer/Shelf/VBoxContainer/Row1" unique_id=52139079 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book7" parent="ShelfContainer/Shelf/VBoxContainer/Row1" unique_id=513056035 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book8" parent="ShelfContainer/Shelf/VBoxContainer/Row1" unique_id=961308928 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book9" parent="ShelfContainer/Shelf/VBoxContainer/Row1" unique_id=845691063 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book10" parent="ShelfContainer/Shelf/VBoxContainer/Row1" unique_id=761391155 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Row2" type="HBoxContainer" parent="ShelfContainer/Shelf/VBoxContainer" unique_id=704817499]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Book1" parent="ShelfContainer/Shelf/VBoxContainer/Row2" unique_id=114548515 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book2" parent="ShelfContainer/Shelf/VBoxContainer/Row2" unique_id=577846925 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book3" parent="ShelfContainer/Shelf/VBoxContainer/Row2" unique_id=954200077 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book4" parent="ShelfContainer/Shelf/VBoxContainer/Row2" unique_id=663342981 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book5" parent="ShelfContainer/Shelf/VBoxContainer/Row2" unique_id=947211047 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book6" parent="ShelfContainer/Shelf/VBoxContainer/Row2" unique_id=723445669 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book7" parent="ShelfContainer/Shelf/VBoxContainer/Row2" unique_id=1947905801 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book8" parent="ShelfContainer/Shelf/VBoxContainer/Row2" unique_id=1351114928 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book9" parent="ShelfContainer/Shelf/VBoxContainer/Row2" unique_id=245753470 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book10" parent="ShelfContainer/Shelf/VBoxContainer/Row2" unique_id=894385134 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Row3" type="HBoxContainer" parent="ShelfContainer/Shelf/VBoxContainer" unique_id=358438601]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Book1" parent="ShelfContainer/Shelf/VBoxContainer/Row3" unique_id=1551756054 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book2" parent="ShelfContainer/Shelf/VBoxContainer/Row3" unique_id=2031655523 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book3" parent="ShelfContainer/Shelf/VBoxContainer/Row3" unique_id=580229084 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book4" parent="ShelfContainer/Shelf/VBoxContainer/Row3" unique_id=389742263 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book5" parent="ShelfContainer/Shelf/VBoxContainer/Row3" unique_id=1120178993 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book6" parent="ShelfContainer/Shelf/VBoxContainer/Row3" unique_id=906328606 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book7" parent="ShelfContainer/Shelf/VBoxContainer/Row3" unique_id=342825053 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book8" parent="ShelfContainer/Shelf/VBoxContainer/Row3" unique_id=1618819495 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book9" parent="ShelfContainer/Shelf/VBoxContainer/Row3" unique_id=1527362282 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book10" parent="ShelfContainer/Shelf/VBoxContainer/Row3" unique_id=1789630460 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Row4" type="HBoxContainer" parent="ShelfContainer/Shelf/VBoxContainer" unique_id=1985547003]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Book1" parent="ShelfContainer/Shelf/VBoxContainer/Row4" unique_id=657418912 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book2" parent="ShelfContainer/Shelf/VBoxContainer/Row4" unique_id=550934540 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book3" parent="ShelfContainer/Shelf/VBoxContainer/Row4" unique_id=134881529 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book4" parent="ShelfContainer/Shelf/VBoxContainer/Row4" unique_id=1850475331 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book5" parent="ShelfContainer/Shelf/VBoxContainer/Row4" unique_id=1183880011 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book6" parent="ShelfContainer/Shelf/VBoxContainer/Row4" unique_id=917757318 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book7" parent="ShelfContainer/Shelf/VBoxContainer/Row4" unique_id=1525770969 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book8" parent="ShelfContainer/Shelf/VBoxContainer/Row4" unique_id=1223336996 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book9" parent="ShelfContainer/Shelf/VBoxContainer/Row4" unique_id=246990728 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Book10" parent="ShelfContainer/Shelf/VBoxContainer/Row4" unique_id=1825468914 instance=ExtResource("4_x6clb")]
+layout_mode = 2
+
+[node name="Highlight" type="TextureRect" parent="." unique_id=628684804]
+custom_minimum_size = Vector2(17, 47)
+layout_mode = 0
+offset_right = 17.0
+offset_bottom = 47.0
+mouse_filter = 2
+texture = ExtResource("5_wlyd0")
+
+[node name="BookContainer" type="CenterContainer" parent="." unique_id=464218591]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="BookContainer" unique_id=520063204]
+layout_mode = 2
+texture = ExtResource("2_mipc1")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BookContainer/Background" unique_id=1713405407]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BookContainer/Background/HBoxContainer" unique_id=1888150255]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Pad" type="Control" parent="BookContainer/Background/HBoxContainer/VBoxContainer" unique_id=1905181191]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="Text" type="Label" parent="BookContainer/Background/HBoxContainer/VBoxContainer" unique_id=400291252]
+custom_minimum_size = Vector2(140, 170)
+custom_maximum_size = Vector2(140, 170)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4392157, 0.05882353, 0.08627451, 1)
+label_settings = SubResource("LabelSettings_btenm")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Pad2" type="Control" parent="BookContainer/Background/HBoxContainer/VBoxContainer" unique_id=2025045345]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+
+[node name="PageCount" type="Label" parent="BookContainer/Background/HBoxContainer/VBoxContainer" unique_id=1873483145]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4392157, 0.05882353, 0.08627451, 1)
+text = "1/1"
+horizontal_alignment = 1
+vertical_alignment = 1

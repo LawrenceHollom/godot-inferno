@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dfhglkmdsooq8"]
+
+[ext_resource type="Script" uid="uid://cc27icvsydj4i" path="res://scenes/babel/book.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dj6furney3lx7" path="res://assets/game/books.png" id="2_atlas"]
+
+[node name="Book" type="TextureRect" unique_id=924810045]
+custom_minimum_size = Vector2(15, 45)
+offset_right = 15.0
+offset_bottom = 45.0
+mouse_filter = 2
+expand_mode = 1
+script = ExtResource("1_script")
+book_atlas = ExtResource("2_atlas")

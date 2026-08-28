@@ -6,6 +6,7 @@ const EXIT_ROOM = "000000000"
 
 @export var room_name_label: Label
 @export var timer_label: Label
+@export var book_overlay: BookOverlay
 
 @export var door_pos: Array[Vector2i]
 @export var back_door_pos: Vector2i
@@ -21,6 +22,7 @@ func _ready() -> void:
 	GlobalState.fade_out.connect(_on_fade_out)
 	room_id = []
 	time_left = GlobalState.BABEL_LIFETIME
+	book_overlay.visible = false
 
 
 func _on_player_moved_to(pos: Vector2i) -> void:
@@ -63,7 +65,12 @@ func get_room_code() -> String:
 
 
 func _on_player_interacted_with(pos: Vector2i) -> void:
-	print("Interacts with ", pos)
+	if pos.x < 7 || pos.x > 15 || pos.y < 4 || pos.y > 10:
+		return
+	var case_num: int = ((pos.x - 8) / 2) + 4 * ((pos.y - 5) / 3)
+	book_overlay.configure(get_room_code(), case_num)
+	book_overlay.visible = true
+	print("Interacts with case number", case_num)
 
 
 func _on_fade_out() -> void:
