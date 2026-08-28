@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dkatn0uup5w1a"]
+
+[ext_resource type="Script" uid="uid://ckwkyf5sqijwt" path="res://scenes/audio/audio_randomiser.gd" id="1_wcucq"]
+
+[node name="AudioRandomiser" type="Node" unique_id=1579339688]
+script = ExtResource("1_wcucq")

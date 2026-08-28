@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cox4jr6eiq0x2"]
+
+[ext_resource type="Texture2D" uid="uid://dyo1dfv0mxgks" path="res://assets/dev/room_tileset.png" id="1_tpmtm"]
+[ext_resource type="Script" uid="uid://djri7ivvn8b2w" path="res://scenes/game/room_layout.gd" id="2_w3kmv"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w3kmv"]
+texture = ExtResource("1_tpmtm")
+texture_region_size = Vector2i(12, 12)
+1:0/0 = 0
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_y4o7w"]
+tile_size = Vector2i(12, 12)
+sources/0 = SubResource("TileSetAtlasSource_w3kmv")
+
+[node name="RoomLayout" type="TileMapLayer" unique_id=1171702860]
+tile_set = SubResource("TileSet_y4o7w")
+script = ExtResource("2_w3kmv")
