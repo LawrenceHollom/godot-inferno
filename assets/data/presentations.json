@@ -1,0 +1,82 @@
+{
+  "INTRO": {
+    "palette": "FIRE",
+    "actions": [
+      {
+        "type": "text",
+        "position": "top",
+        "text": "Text at the top is typed onto the screen."
+      },
+      {
+        "type": "text",
+        "position": "middle",
+        "text": "Press Space, Enter, Right Arrow, or the on-screen button to continue."
+      },
+      {
+        "type": "fade_in",
+        "image": "background.png",
+        "duration": 1.0
+      },
+      {
+        "type": "text",
+        "position": "bottom",
+        "text": "Images and text actions can be freely mixed."
+      },
+      {
+        "type": "fade_out",
+        "image": "background.png",
+        "duration": 1.0
+      }
+    ]
+  },
+  "PAST": {
+    "palette": "GREEN",
+    "actions": [
+      {
+        "type": "fade_in",
+        "image": "background.png",
+        "duration": 1.0
+      },
+      {
+        "type": "text",
+        "position": "top",
+        "text": "Default text for the past sequence."
+      },
+      {
+        "type": "text",
+        "position": "bottom",
+        "text": "Replace these actions in presentations.json."
+      },
+      {
+        "type": "fade_out",
+        "image": "background.png",
+        "duration": 1.0
+      }
+    ]
+  },
+  "ASHES": {
+    "palette": "ASH",
+    "actions": [
+      {
+        "type": "text",
+        "position": "middle",
+        "text": "Default text for the ashes sequence."
+      },
+      {
+        "type": "fade_in",
+        "image": "background.png",
+        "duration": 1.0
+      },
+      {
+        "type": "text",
+        "position": "bottom",
+        "text": "Each named image gets its own independent layer."
+      },
+      {
+        "type": "fade_out",
+        "image": "background.png",
+        "duration": 1.0
+      }
+    ]
+  }
+}

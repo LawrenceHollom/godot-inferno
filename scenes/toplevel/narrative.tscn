@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://btjk4qad0cwi4"]
+
+[ext_resource type="Theme" uid="uid://b7uxclx4y81u" path="res://assets/theme/main_theme.tres" id="1_d6a2e"]
+[ext_resource type="Script" uid="uid://cqocjwwj173jf" path="res://scenes/toplevel/narrative.gd" id="2_d6a2e"]
+[ext_resource type="PackedScene" path="res://scenes/presentation/presentation_controller.tscn" id="3_pn56o"]
+
+[node name="NarrativePresentation" type="Control" unique_id=2031375499]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_d6a2e")
+script = ExtResource("2_d6a2e")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1969397618]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ImageLayers" type="Control" parent="." unique_id=929142128]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextTop" type="RichTextLabel" parent="." unique_id=858208132]
+visible = false
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 151.0
+offset_bottom = 40.0
+mouse_filter = 2
+fit_content = true
+scroll_active = false
+
+[node name="TextMiddle" type="RichTextLabel" parent="." unique_id=145401838]
+visible = false
+layout_mode = 0
+offset_left = 5.0
+offset_top = 43.0
+offset_right = 151.0
+offset_bottom = 78.0
+mouse_filter = 2
+fit_content = true
+scroll_active = false
+
+[node name="TextBottom" type="RichTextLabel" parent="." unique_id=896509970]
+visible = false
+layout_mode = 0
+offset_left = 5.0
+offset_top = 81.0
+offset_right = 151.0
+offset_bottom = 116.0
+mouse_filter = 2
+fit_content = true
+scroll_active = false
+
+[node name="AdvanceButton" type="Button" parent="." unique_id=2105824802]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 97.0
+offset_right = 151.0
+offset_bottom = 118.0
+text = ">"
+
+[node name="PresentationController" parent="." unique_id=193870088 instance=ExtResource("3_pn56o")]
+
+[connection signal="pressed" from="AdvanceButton" to="." method="_on_advance_button_pressed"]

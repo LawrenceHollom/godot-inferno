@@ -1,0 +1,63 @@
+[gd_resource type="Theme" format=3 uid="uid://b7uxclx4y81u"]
+
+[ext_resource type="FontFile" uid="uid://8an7fengkrba" path="res://assets/fonts/m5x7.ttf" id="1_m5x7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_grabber"]
+region = Rect2(12, 40, 7, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_grabber_disabled"]
+region = Rect2(0, 40, 7, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_grabber_highlight"]
+region = Rect2(12, 50, 7, 9)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slider_fill"]
+content_margin_top = 2.5
+content_margin_bottom = 2.5
+bg_color = Color(0.039215688, 0.49411765, 0.54509807, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.039215688, 0.49411765, 0.54509807, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slider_fill_highlight"]
+content_margin_top = 2.5
+content_margin_bottom = 2.5
+bg_color = Color(0.7450981, 0.84313726, 0.9137255, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.7450981, 0.84313726, 0.9137255, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slider_groove"]
+content_margin_top = 2.5
+content_margin_bottom = 2.5
+bg_color = Color(0.03529412, 0.22745098, 0.32941177, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.039215688, 0.49411765, 0.54509807, 1)
+anti_aliasing = false
+
+[resource]
+default_font = ExtResource("1_m5x7")
+default_font_size = 16
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_disabled_color = Color(0.988235, 0.894118, 0.658824, 0.5)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+HSlider/constants/center_grabber = 1
+HSlider/constants/grabber_offset = 0
+HSlider/icons/grabber = SubResource("AtlasTexture_grabber")
+HSlider/icons/grabber_disabled = SubResource("AtlasTexture_grabber_disabled")
+HSlider/icons/grabber_highlight = SubResource("AtlasTexture_grabber_highlight")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_slider_fill")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_slider_fill_highlight")
+HSlider/styles/slider = SubResource("StyleBoxFlat_slider_groove")
+Label/colors/font_color = Color(0.988235, 0.894118, 0.658824, 1)
