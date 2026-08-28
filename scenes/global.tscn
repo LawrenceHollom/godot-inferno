@@ -1,6 +1,16 @@
 [gd_scene format=3 uid="uid://clryac1sbvlbc"]
 
 [ext_resource type="Script" uid="uid://c56gqsv24firq" path="res://scenes/global.gd" id="1_4pk28"]
+[ext_resource type="Script" uid="uid://h2ntmlh33vuy" path="res://scripts/room_namer.gd" id="2_nmxvb"]
+[ext_resource type="Script" uid="uid://boyutsjmc3tlj" path="res://scripts/book_controller.gd" id="3_opebo"]
 
-[node name="Global" type="Node" unique_id=368460931]
+[node name="Global" type="Node" unique_id=368460931 node_paths=PackedStringArray("room_namer", "book_controller")]
 script = ExtResource("1_4pk28")
+room_namer = NodePath("RoomNamer")
+book_controller = NodePath("BookController")
+
+[node name="RoomNamer" type="Node" parent="." unique_id=1146869300]
+script = ExtResource("2_nmxvb")
+
+[node name="BookController" type="Node" parent="." unique_id=372371008]
+script = ExtResource("3_opebo")

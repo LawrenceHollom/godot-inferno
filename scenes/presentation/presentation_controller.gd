@@ -27,7 +27,7 @@ var _animation_target_alpha: float = 1.0
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.echo:
 		return
-	if event.is_action_pressed("advance"):
+	if event.is_action_pressed("right"):
 		advance()
 		get_viewport().set_input_as_handled()
 
@@ -68,6 +68,7 @@ func say(label: RichTextLabel, message: String, speed: float = -1.0) -> void:
 	_state = PlaybackState.WAITING
 	await advance_requested
 	_state = PlaybackState.IDLE
+	_active_label.text = ""
 	_active_label = null
 
 

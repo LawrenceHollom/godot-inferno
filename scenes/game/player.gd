@@ -60,10 +60,6 @@ func _unhandled_input(event: InputEvent) -> void:
 func move_on_grid(direction: Vector2i) -> void:
 	var target := grid_position + direction
 
-	if target.x < 0 or target.x >= GameState.GRID_WIDTH:
-		return
-	if target.y < 0 or target.y >= GameState.GRID_HEIGHT:
-		return
 	if not open_cells[target.y][target.x]:
 		interacted_with.emit(target)
 		return

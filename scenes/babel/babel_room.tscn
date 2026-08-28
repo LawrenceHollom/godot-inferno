@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bt5g7f5qviv6i"]
 
-[ext_resource type="Texture2D" uid="uid://bkeuo2ii5hhvi" path="res://assets/game/background.png" id="1_ffjih"]
+[ext_resource type="Texture2D" uid="uid://o8qi8dtlbkup" path="res://assets/backgrounds/babel.png" id="1_ffjih"]
 
 [node name="BabelRoom" type="Control" unique_id=1779074826]
 layout_mode = 3

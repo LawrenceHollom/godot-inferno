@@ -21,8 +21,8 @@ GlobalState="*uid://clryac1sbvlbc"
 
 [display]
 
-window/size/viewport_width=156
-window/size/viewport_height=120
+window/size/viewport_width=360
+window/size/viewport_height=240
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 

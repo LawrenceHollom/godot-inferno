@@ -48,13 +48,13 @@ func move_room(door_index: int) -> void:
 		entry_door_index = 0
 		room_id.push_back(door_index)
 		player.reset_to_room_start()
-	var room_name: String = get_room_name()
-	room_name_label.text = room_name
-	if room_name == EXIT_ROOM:
+	var room_code: String = get_room_code()
+	room_name_label.text = GlobalState.get_room_name(room_code)
+	if room_code == EXIT_ROOM:
 		GlobalState.on_babel_win()
 
 
-func get_room_name() -> String:
+func get_room_code() -> String:
 	var out: String = ""
 	for i: int in len(room_id):
 		out += str((room_id[i] + GlobalState.DECODER[i]) % 3)

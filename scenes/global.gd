@@ -2,9 +2,9 @@ extends Node
 
 class_name GameState
 
-const CELL_SIZE: int = 12
-const GRID_WIDTH: int = 13	
-const GRID_HEIGHT: int = 10
+const CELL_SIZE: int = 16
+const GRID_WIDTH: int = 21
+const GRID_HEIGHT: int = 14
 const BABEL_LIFETIME: int = 100
 
 const DECODER: Array[int] = [3, 3, 2, 1, 1, 1, 3, 3, 2, 1, 1, 2, 
@@ -15,6 +15,9 @@ const DECODER: Array[int] = [3, 3, 2, 1, 1, 1, 3, 3, 2, 1, 1, 2,
 3, 2, 2, 3, 1, 3, 2, 3, 3]
 
 const NARRATIVE: Array[String] = ["PAST", "ASHES"]
+
+@export var room_namer: RoomNamer
+@export var book_controller: BookController
 
 var narrative_index: int = 0
 var narrative_data: Dictionary[String, NarrativeData] = {}
@@ -37,6 +40,11 @@ var state: CurrentScene = CurrentScene.INTRO
 
 func _ready() -> void:
 	narrative_data = NarrativeData.load_all()
+
+
+func get_room_name(room_code: String) -> String:
+	return room_namer.get_room_name(room_code)
+
 
 # Called when the player successfully exists Babel.
 func on_babel_win() -> void:
@@ -67,14 +75,14 @@ func get_narrative_data(presentation_name: String) -> NarrativeData:
 func next_standard_scene() -> void:
 	match state:
 		CurrentScene.INTRO:
-			next_palette = PaletteData.Palette.FIRE
 			state = CurrentScene.BABEL
+			next_palette = PaletteData.Palette.FIRE
 		CurrentScene.BABEL:
-			next_palette = narrative_data[get_presentation_name()].palette
 			state = CurrentScene.NARRATIVE
+			next_palette = narrative_data[get_presentation_name()].palette
 		CurrentScene.NARRATIVE:
-			next_palette = PaletteData.Palette.FIRE
 			state = CurrentScene.BABEL
+			next_palette = PaletteData.Palette.FIRE
 	fade_out.emit()
 
 
