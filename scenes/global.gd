@@ -46,6 +46,10 @@ func get_room_name(room_code: String) -> String:
 	return room_namer.get_room_name(room_code)
 
 
+func get_book_text(room_name: String, shelf_number: int, book_number: int, case_number: int) -> String:
+	return book_controller.get_book(room_name, shelf_number, book_number, case_number)
+
+
 # Called when the player successfully exists Babel.
 func on_babel_win() -> void:
 	print("You are big winner!")

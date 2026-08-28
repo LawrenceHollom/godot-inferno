@@ -117,8 +117,6 @@ func _stable_hash(value: String) -> int:
 
 
 func _is_valid_room_code(room_code: String) -> bool:
-	if room_code.is_empty():
-		return false
 	for index: int in room_code.length():
 		if room_code.substr(index, 1) not in ["0", "1", "2"]:
 			return false

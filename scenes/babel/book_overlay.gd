@@ -15,6 +15,8 @@ var shelves: Array[Array] = []
 
 var selected_shelf_number: int = 0
 var selected_book_number: int = 0
+var book_pages: Array[String] = []
+var current_page: int = 0
 
 signal closed
 
@@ -35,6 +37,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	if book_container.visible:
 		if event.is_action_pressed("escape"):
 			_close_book()
+			get_viewport().set_input_as_handled()
+		elif event.is_action_pressed("left"):
+			_change_page(-1)
+			get_viewport().set_input_as_handled()
+		elif event.is_action_pressed("right"):
+			_change_page(1)
 			get_viewport().set_input_as_handled()
 		elif _is_overlay_input(event):
 			get_viewport().set_input_as_handled()
@@ -159,21 +167,85 @@ func _open_selected_book() -> void:
 	var selected_book: Book = _get_selected_book()
 	if selected_book == null:
 		return
-	book_text.text = GlobalState.book_controller.get_book(
+	var full_text: String = GlobalState.get_book_text(
 		selected_book.room_code,
 		selected_book.shelf_number,
 		selected_book.book_number,
 		selected_book.case_number,
 	)
-	page_count.text = "1/1"
 	highlight.hide()
 	book_container.show()
+	print("Are we running anything here? text = ", full_text)
+	book_pages = _paginate_text(full_text)
+	current_page = 0
+	_show_current_page()
 
 
 func _close_book() -> void:
 	book_container.hide()
 	highlight.show()
 	_update_highlight()
+
+
+func _change_page(direction: int) -> void:
+	if book_pages.is_empty():
+		return
+	current_page = clampi(current_page + direction, 0, book_pages.size() - 1)
+	_show_current_page()
+
+
+func _show_current_page() -> void:
+	book_text.text = book_pages[current_page]
+	page_count.text = "%d/%d" % [current_page + 1, book_pages.size()]
+
+
+func _paginate_text(full_text: String) -> Array[String]:
+	var pages: Array[String] = []
+	var remaining: String = full_text.strip_edges()
+	if remaining.is_empty():
+		pages.append("")
+		return pages
+
+	while not remaining.is_empty():
+		if _text_fits(remaining):
+			pages.append(remaining)
+			break
+
+		var low: int = 1
+		var high: int = remaining.length()
+		var fitting_characters: int = 1
+		while low <= high:
+			var midpoint: int = (low + high) / 2
+			if _text_fits(remaining.substr(0, midpoint)):
+				fitting_characters = midpoint
+				low = midpoint + 1
+			else:
+				high = midpoint - 1
+
+		var split_position: int = _find_word_boundary(remaining, fitting_characters)
+		var page: String = remaining.substr(0, split_position).strip_edges()
+		if page.is_empty():
+			split_position = fitting_characters
+			page = remaining.substr(0, split_position)
+		pages.append(page)
+		remaining = remaining.substr(split_position).strip_edges()
+
+	return pages
+
+
+func _text_fits(candidate: String) -> bool:
+	book_text.text = candidate
+	return book_text.get_line_count() <= book_text.get_visible_line_count()
+
+
+func _find_word_boundary(text: String, maximum_position: int) -> int:
+	var position: int = maximum_position
+	while position > 0:
+		var character: String = text.substr(position - 1, 1)
+		if character in [" ", "\n", "\r", "\t"]:
+			return position
+		position -= 1
+	return maximum_position
 
 
 func _is_overlay_input(event: InputEvent) -> bool:
