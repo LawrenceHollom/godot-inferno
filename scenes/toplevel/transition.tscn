@@ -1,20 +1,56 @@
 [gd_scene format=3 uid="uid://cuj1e81yax58l"]
 
+[ext_resource type="Theme" uid="uid://b7uxclx4y81u" path="res://assets/theme/main_theme.tres" id="1_gpoei"]
 [ext_resource type="Script" uid="uid://brkdw6ou1dhlm" path="res://scenes/toplevel/transition.gd" id="1_tbc8n"]
+[ext_resource type="Texture2D" uid="uid://cy4rb4ne2rr78" path="res://assets/backgrounds/eye_open.png" id="3_4w86k"]
+[ext_resource type="Texture2D" uid="uid://c7mwqbq1p57aj" path="res://assets/backgrounds/eye_half_open.png" id="4_weyrq"]
+[ext_resource type="Texture2D" uid="uid://btxowiuw1qgwx" path="res://assets/backgrounds/eye_closed.png" id="5_ugxdq"]
+[ext_resource type="Texture2D" uid="uid://8nx7ocbx0cdn" path="res://assets/backgrounds/tower_of_babel.png" id="6_003ll"]
+[ext_resource type="Texture2D" uid="uid://d3tmvdyynbkkj" path="res://assets/backgrounds/tree.png" id="7_xfi4b"]
+[ext_resource type="Texture2D" uid="uid://cija2n3aft866" path="res://assets/backgrounds/three_flowers.png" id="8_8ocmm"]
 
-[node name="Transition" type="Control" unique_id=435532729]
+[node name="Transition" type="Control" unique_id=435532729 node_paths=PackedStringArray("colour_rect", "texture_rect", "label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_gpoei")
 script = ExtResource("1_tbc8n")
+colour_rect = NodePath("ColorRect")
+texture_rect = NodePath("TextureRect")
+label = NodePath("Label")
+eyes = Array[Texture2D]([ExtResource("3_4w86k"), ExtResource("4_weyrq"), ExtResource("5_ugxdq")])
+babel = ExtResource("6_003ll")
+tree = ExtResource("7_xfi4b")
+flower = ExtResource("8_8ocmm")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1965167175]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4392157, 0.05882353, 0.08627451, 1)
 
 [node name="Label" type="Label" parent="." unique_id=782338417]
-layout_mode = 0
-offset_left = 41.0
-offset_top = 40.0
-offset_right = 120.0
-offset_bottom = 63.0
-text = "Transition"
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 80
+text = "INFERNO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1452222502]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
