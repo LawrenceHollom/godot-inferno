@@ -11,33 +11,33 @@ enum Palette {
 static func get_light(palette: Palette) -> Color:
 	match palette:
 		Palette.FIRE:
-			return Color("fce4a8")
+			return Color("FFECD0")
 		Palette.ASH:
-			return Color("e5e1da")
+			return Color("d3e4d3")
 		Palette.GREEN:
-			return Color("d5e8bd")
+			return Color("eed7ac")
 	return Color.WHITE
 
 
 static func get_medium(palette: Palette) -> Color:
 	match palette:
 		Palette.FIRE:
-			return Color("df7857")
+			return Color("e24c37")
 		Palette.ASH:
-			return Color("85817d")
+			return Color("7c8477")
 		Palette.GREEN:
-			return Color("668f5b")
+			return Color("8b9525")
 	return Color.GRAY
 
 
 static func get_dark(palette: Palette) -> Color:
 	match palette:
 		Palette.FIRE:
-			return Color("3f2029")
+			return Color("700F16")
 		Palette.ASH:
-			return Color("29282d")
+			return Color("181d1a")
 		Palette.GREEN:
-			return Color("203c32")
+			return Color("2a1f07")
 	return Color.BLACK
 
 

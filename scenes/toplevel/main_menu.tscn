@@ -11,10 +11,21 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_rhtwk")
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1173565383]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4392157, 0.05882353, 0.08627451, 1)
+
 [node name="Button" type="Button" parent="." unique_id=1392596715]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 159.0
+offset_top = 97.0
+offset_right = 205.0
+offset_bottom = 128.0
 text = "Start"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

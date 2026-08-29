@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bt5g7f5qviv6i" path="res://scenes/babel/babel_room.tscn" id="3_vc7bp"]
 [ext_resource type="Texture2D" uid="uid://dyo1dfv0mxgks" path="res://assets/dev/room_tileset.png" id="5_0d36k"]
 [ext_resource type="PackedScene" uid="uid://cxmegvdrwvi8j" path="res://scenes/babel/book_overlay.tscn" id="7_qankl"]
+[ext_resource type="PackedScene" uid="uid://bjjk1m4qwqitu" path="res://scenes/presentation/fire.tscn" id="8_01qhj"]
+[ext_resource type="Shader" uid="uid://bkeqh4u5n1loi" path="res://scripts/fire.gdshader" id="9_uv28j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vc7bp"]
 texture = ExtResource("5_0d36k")
@@ -16,7 +18,28 @@ texture = ExtResource("5_0d36k")
 [sub_resource type="TileSet" id="TileSet_0d36k"]
 sources/0 = SubResource("TileSetAtlasSource_vc7bp")
 
-[node name="Babel" type="Control" unique_id=1198128655 node_paths=PackedStringArray("player", "room_name_label", "timer_label", "book_overlay")]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uv28j"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_01qhj"]
+noise = SubResource("FastNoiseLite_uv28j")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tfqr2"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sd3s0"]
+noise = SubResource("FastNoiseLite_tfqr2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sd3s0"]
+resource_local_to_scene = true
+shader = ExtResource("9_uv28j")
+shader_parameter/screen_size = Vector2(360, 240)
+shader_parameter/light_colour = Color(1, 0.9254902, 0.8156863, 1)
+shader_parameter/mid_colour = Color(0.8862745, 0.29803923, 0.21568628, 1)
+shader_parameter/dark_colour = Color(0.8862745, 0.29803923, 0.21568628, 1)
+shader_parameter/intensity = 0.5050000239875
+shader_parameter/noise_large = SubResource("NoiseTexture2D_01qhj")
+shader_parameter/noise_small = SubResource("NoiseTexture2D_sd3s0")
+
+[node name="Babel" type="Control" unique_id=1198128655 node_paths=PackedStringArray("player", "fire", "room_name_label", "timer_label", "book_overlay")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,6 +49,7 @@ grow_vertical = 2
 theme = ExtResource("1_qjtya")
 script = ExtResource("1_yrew0")
 player = NodePath("Player")
+fire = NodePath("Fire")
 room_name_label = NodePath("RoomNameDebug")
 timer_label = NodePath("CountdownLabel")
 book_overlay = NodePath("BookOverlay")
@@ -74,6 +98,10 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "100"
 
 [node name="BookOverlay" parent="." unique_id=1540440884 instance=ExtResource("7_qankl")]
+layout_mode = 1
+
+[node name="Fire" parent="." unique_id=480503765 instance=ExtResource("8_01qhj")]
+material = SubResource("ShaderMaterial_sd3s0")
 layout_mode = 1
 
 [connection signal="interacted_with" from="Player" to="." method="_on_player_interacted_with"]

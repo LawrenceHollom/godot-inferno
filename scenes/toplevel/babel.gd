@@ -3,6 +3,7 @@ extends Control
 const EXIT_ROOM = "000000000"
 
 @export var player: Player
+@export var fire: Fire
 
 @export var room_name_label: Label
 @export var timer_label: Label
@@ -28,6 +29,8 @@ func _ready() -> void:
 func _on_player_moved_to(pos: Vector2i) -> void:
 	time_left -= 1
 	timer_label.text = str(time_left)
+	var intensity: float = 1.0 - (time_left as float / GlobalState.BABEL_LIFETIME as float)
+	fire.set_intensity(intensity * intensity / 2.0) 
 
 	if pos == door_pos[0]:
 		move_room(1)

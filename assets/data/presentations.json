@@ -1,31 +1,41 @@
 {
   "INTRO": {
-    "palette": "FIRE",
+    "palette": "ASH",
     "actions": [
       {
         "type": "text",
-        "position": "top",
-        "text": "Text at the top is typed onto the screen."
+        "position": "bottom",
+        "text": "Where am I?"
       },
       {
         "type": "text",
-        "position": "middle",
-        "text": "Press Space, Enter, Right Arrow, or the on-screen button to continue."
+        "position": "top",
+        "text": "There will be three doors."
       },
       {
         "type": "fade_in",
-        "image": "background.png",
+        "image": "grim.png",
         "duration": 1.0
       },
       {
         "type": "text",
         "position": "bottom",
-        "text": "Images and text actions can be freely mixed."
+        "text": "What?."
       },
       {
-        "type": "fade_out",
-        "image": "background.png",
-        "duration": 1.0
+        "type": "text",
+        "position": "top",
+        "text": "There will be three doors. You will choose your path"
+      },
+      {
+        "type": "text",
+        "position": "bottom",
+        "text": "Where am I?."
+      },
+      {
+        "type": "text",
+        "position": "top",
+        "text": "You are in --"
       }
     ]
   },
@@ -34,18 +44,18 @@
     "actions": [
       {
         "type": "fade_in",
-        "image": "background.png",
+        "image": "growth.png",
         "duration": 1.0
       },
       {
         "type": "text",
         "position": "top",
-        "text": "Default text for the past sequence."
+        "text": "I wrote I know I wrote / pages and pages I filled books / with overflowing ideas."
       },
       {
         "type": "text",
         "position": "bottom",
-        "text": "Replace these actions in presentations.json."
+        "text": "But where are they now / did they go anywhere were / they read did they mean / anything?"
       },
       {
         "type": "fade_out",
@@ -58,23 +68,23 @@
     "palette": "ASH",
     "actions": [
       {
-        "type": "text",
-        "position": "middle",
-        "text": "Default text for the ashes sequence."
-      },
-      {
         "type": "fade_in",
-        "image": "background.png",
+        "image": "babel_ash.png",
         "duration": 1.0
       },
       {
         "type": "text",
+        "position": "top",
+        "text": "Was it merely the journey / of creating these worlds / not walked by any step / but mine"
+      },
+      {
+        "type": "text",
         "position": "bottom",
-        "text": "Each named image gets its own independent layer."
+        "text": "I have walked in / trails but who / will follow mine"
       },
       {
         "type": "fade_out",
-        "image": "background.png",
+        "image": "babel_ash.png",
         "duration": 1.0
       }
     ]
