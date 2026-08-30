@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://bg55h5hk06yg8"]
 
-[ext_resource type="Texture2D" uid="uid://be0q2l0mna21t" path="res://assets/game/Character.png" id="1_6w7gq"]
 [ext_resource type="Script" uid="uid://j8nj3pm2r1da" path="res://scenes/game/player.gd" id="1_dd427"]
 
 [node name="Player" type="Control" unique_id=427023341]
@@ -12,8 +11,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dd427")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=633286676]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=284475060]
+custom_minimum_size = Vector2(16, 16)
+custom_maximum_size = Vector2(16, 16)
 layout_mode = 0
-offset_right = 12.0
-offset_bottom = 12.0
-texture = ExtResource("1_6w7gq")
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Control" type="Control" parent="CenterContainer" unique_id=1330947650]
+layout_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CenterContainer/Control" unique_id=445843541]

@@ -5,8 +5,8 @@
     "shelf": 0,
     "position": 0,
     "text": "This is a test special book in the first room.",
-    "overlay_texture": "res://resources/special_books/test_book_one_overlay.tres",
-    "bookcase_texture": "res://resources/special_books/test_book_one_bookcase.tres"
+    "overlay_texture": "res://resources/special_books/special_book_big.tres",
+    "bookcase_texture": "res://resources/special_books/special_book_small.tres"
   },
   {
     "room_code": "1",
@@ -14,7 +14,7 @@
     "shelf": 2,
     "position": 4,
     "text": "This is a test special book in room one.",
-    "overlay_texture": "res://resources/special_books/test_book_two_overlay.tres",
-    "bookcase_texture": "res://resources/special_books/test_book_two_bookcase.tres"
+    "overlay_texture": "res://resources/special_books/special_book_big.tres",
+    "bookcase_texture": "res://resources/special_books/special_book_small.tres"
   }
 ]

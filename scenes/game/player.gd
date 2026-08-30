@@ -6,6 +6,8 @@ class_name Player
 
 @export var room_layout: RoomLayout
 
+@export_range(0.1, 30.0, 0.1, "suffix:fps") var idle_animation_fps := 4.0
+
 signal interacted_with(pos: Vector2i)
 signal moved_to(pos: Vector2i)
 
@@ -15,9 +17,25 @@ var grid_position: Vector2i
 var is_running: bool
 
 const OFFSET := Vector2(-4, 0)
+const CHARACTER_TEXTURE := preload("res://assets/game/Character.png")
+const SPRITESHEET_COLUMNS := 2
+const SPRITESHEET_ROWS := 4
+const ROW_ANIMATIONS := [&"down", &"up", &"left", &"right"]
+
+const DIRECTION_ANIMATIONS := {
+	Vector2i.DOWN: &"down",
+	Vector2i.UP: &"up",
+	Vector2i.LEFT: &"left",
+	Vector2i.RIGHT: &"right",
+}
+
+@onready var animated_sprite: AnimatedSprite2D = $CenterContainer/Control/AnimatedSprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	setup_animations()
+	animated_sprite.play(DIRECTION_ANIMATIONS[Vector2i.DOWN])
+
 	open_cells = []
 	is_running = true
 	for y in range(GameState.GRID_HEIGHT):
@@ -55,7 +73,30 @@ func _unhandled_input(event: InputEvent) -> void:
 		direction = Vector2i.RIGHT
 
 	if direction != Vector2i.ZERO:
+		animated_sprite.play(DIRECTION_ANIMATIONS[direction])
 		move_on_grid(direction)
+
+
+func setup_animations() -> void:
+	var sprite_frames := SpriteFrames.new()
+	var frame_size := Vector2i(
+		CHARACTER_TEXTURE.get_width() / SPRITESHEET_COLUMNS,
+		CHARACTER_TEXTURE.get_height() / SPRITESHEET_ROWS
+	)
+
+	for row in range(SPRITESHEET_ROWS):
+		var animation_name: StringName = ROW_ANIMATIONS[row]
+		sprite_frames.add_animation(animation_name)
+		sprite_frames.set_animation_loop(animation_name, true)
+		sprite_frames.set_animation_speed(animation_name, idle_animation_fps)
+
+		for column in range(SPRITESHEET_COLUMNS):
+			var frame := AtlasTexture.new()
+			frame.atlas = CHARACTER_TEXTURE
+			frame.region = Rect2(Vector2i(column, row) * frame_size, frame_size)
+			sprite_frames.add_frame(animation_name, frame)
+
+	animated_sprite.sprite_frames = sprite_frames
 
 
 func move_on_grid(direction: Vector2i) -> void:

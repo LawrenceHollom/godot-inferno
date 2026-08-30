@@ -1,6 +1,8 @@
 class_name BookOverlay
 extends Control
 
+const ANIMATION_DURATION: float = 0.12
+
 @export var shelf_root: Container
 @export var highlight: TextureRect
 @export var book_container: Control
@@ -17,6 +19,8 @@ var selected_shelf_number: int = 0
 var selected_book_number: int = 0
 var book_pages: Array[String] = []
 var current_page: int = 0
+var input_locked: bool = false
+var active_tween: Tween
 
 signal closed
 
@@ -25,6 +29,7 @@ func _ready() -> void:
 	_read_books()
 	book_container.hide()
 	highlight.show()
+	visibility_changed.connect(_on_visibility_changed)
 	call_deferred("_update_highlight")
 
 
@@ -32,6 +37,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not visible:
 		return
 	if event is InputEventKey and event.echo:
+		return
+	if input_locked:
+		if event.is_action_pressed("escape") or _is_overlay_input(event):
+			get_viewport().set_input_as_handled()
 		return
 
 	if book_container.visible:
@@ -65,8 +74,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_open_selected_book()
 		get_viewport().set_input_as_handled()
 	elif event.is_action_pressed("escape"):
-		hide()
-		closed.emit()
+		_close_overlay()
 		get_viewport().set_input_as_handled()
 
 
@@ -178,12 +186,66 @@ func _open_selected_book() -> void:
 	book_pages = _paginate_text(full_text)
 	current_page = 0
 	_show_current_page()
+	_animate_in(book_container)
 
 
 func _close_book() -> void:
+	input_locked = true
+	_set_center_pivot(book_container)
+	_stop_active_tween()
+	active_tween = create_tween()
+	active_tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	active_tween.tween_property(book_container, "scale", Vector2.ZERO, ANIMATION_DURATION)
+	await active_tween.finished
 	book_container.hide()
+	book_container.scale = Vector2.ONE
 	highlight.show()
 	_update_highlight()
+	input_locked = false
+
+
+func _close_overlay() -> void:
+	input_locked = true
+	_set_center_pivot(self)
+	_stop_active_tween()
+	active_tween = create_tween()
+	active_tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	active_tween.tween_property(self, "scale", Vector2.ZERO, ANIMATION_DURATION)
+	await active_tween.finished
+	hide()
+	scale = Vector2.ONE
+	input_locked = false
+	closed.emit()
+
+
+func _on_visibility_changed() -> void:
+	if is_visible_in_tree():
+		_animate_in(self)
+	else:
+		_stop_active_tween()
+		scale = Vector2.ONE
+		input_locked = false
+
+
+func _animate_in(control: Control) -> void:
+	input_locked = true
+	_set_center_pivot(control)
+	_stop_active_tween()
+	control.scale = Vector2.ZERO
+	active_tween = create_tween()
+	active_tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	active_tween.tween_property(control, "scale", Vector2.ONE, ANIMATION_DURATION)
+	await active_tween.finished
+	input_locked = false
+
+
+func _set_center_pivot(control: Control) -> void:
+	control.pivot_offset = control.size * 0.5
+
+
+func _stop_active_tween() -> void:
+	if active_tween != null and active_tween.is_valid():
+		active_tween.kill()
 
 
 func _change_page(direction: int) -> void:
