@@ -12,7 +12,21 @@ static func get_book_texture(
 	shelf_number: int,
 	book_number: int,
 	case_number: int,
-) -> AtlasTexture:
+	for_bookcase: bool = false,
+) -> Texture2D:
+	var special_book: SpecialBook = GlobalState.book_controller.get_special_book(
+		room_code,
+		shelf_number,
+		book_number,
+		case_number,
+	)
+	if special_book != null:
+		return (
+			special_book.bookcase_texture
+			if for_bookcase
+			else special_book.overlay_texture
+		)
+
 	if book_atlas == null:
 		push_warning("Book has no texture atlas assigned.")
 		return null

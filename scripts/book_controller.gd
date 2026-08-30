@@ -9,11 +9,31 @@ const UINT32_MASK: int = 0xffffffff
 
 var books: Array[String] = []
 var total_books: int = 0
+var special_books: Dictionary[String, SpecialBook] = {}
 
 
 func _ready() -> void:
 	books = _load_books()
 	total_books = books.size()
+	_load_special_books()
+
+
+func _load_special_books() -> void:
+	special_books.clear()
+	for special_book: SpecialBook in SpecialBook.load_all():
+		var location_key: String = special_book.get_location_key()
+		if special_books.has(location_key):
+			push_warning(
+				"Ignoring duplicate special book at room '%s', case %d, shelf %d, position %d."
+				% [
+					special_book.room_code,
+					special_book.case,
+					special_book.shelf,
+					special_book.position,
+				]
+			)
+			continue
+		special_books[location_key] = special_book
 
 
 func _load_books() -> Array[String]:
@@ -105,8 +125,31 @@ func get_book(
 	book_number: int,
 	case_number: int,
 ) -> String:
+	var special_book := get_special_book(
+		room_code,
+		shelf_number,
+		book_number,
+		case_number,
+	)
+	if special_book != null:
+		return special_book.text
 	var index: int = get_book_index(room_code, shelf_number, book_number, case_number)
 	return books[index] if index >= 0 else ""
+
+
+func get_special_book(
+	room_code: String,
+	shelf_number: int,
+	book_number: int,
+	case_number: int,
+) -> SpecialBook:
+	var location_key := SpecialBook.make_location_key(
+		room_code,
+		case_number,
+		shelf_number,
+		book_number,
+	)
+	return special_books.get(location_key) as SpecialBook
 
 
 func _stable_hash(value: String) -> int:

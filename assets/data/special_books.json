@@ -1,0 +1,20 @@
+[
+  {
+    "room_code": "",
+    "case": 0,
+    "shelf": 0,
+    "position": 0,
+    "text": "This is a test special book in the first room.",
+    "overlay_texture": "res://resources/special_books/test_book_one_overlay.tres",
+    "bookcase_texture": "res://resources/special_books/test_book_one_bookcase.tres"
+  },
+  {
+    "room_code": "1",
+    "case": 1,
+    "shelf": 2,
+    "position": 4,
+    "text": "This is a test special book in room one.",
+    "overlay_texture": "res://resources/special_books/test_book_two_overlay.tres",
+    "bookcase_texture": "res://resources/special_books/test_book_two_bookcase.tres"
+  }
+]

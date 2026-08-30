@@ -86,6 +86,7 @@ func move_room(door_index: int) -> void:
 
 func setup_room_name_labels() -> void:
 	var room_code: String = get_room_code()
+	active_room.setup_for_room(room_code)
 	for i in range(3):
 		var next_word: String = GlobalState.get_next_room_word(room_code, (i + GlobalState.DECODER[len(room_code)]) % 3)
 		room_name_labels[(i + 2) % 3].text = next_word

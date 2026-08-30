@@ -28,8 +28,6 @@ func configure(new_room_code: String, new_case_number: int) -> void:
 	case_number = new_case_number
 	if is_node_ready():
 		_update_textures()
-	_create_books()
-	_update_textures()
 
 
 func _create_books() -> void:
@@ -58,5 +56,6 @@ func _update_textures() -> void:
 					shelf_number,
 					book_number,
 					case_number,
+					true,
 				)
 			)

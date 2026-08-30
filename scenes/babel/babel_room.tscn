@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://o8qi8dtlbkup" path="res://assets/backgrounds/babel.png" id="1_ffjih"]
 [ext_resource type="PackedScene" uid="uid://db1r42t1fegtc" path="res://scenes/babel/bookcase.tscn" id="3_pda4t"]
 
-[node name="BabelRoom" type="Control" unique_id=1779074826]
+[node name="BabelRoom" type="Control" unique_id=1779074826 node_paths=PackedStringArray("bookcases")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,6 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7y271")
+bookcases = [NodePath("CenterContainer/TextureRect/GridContainer/Bookcase0"), NodePath("CenterContainer/TextureRect/GridContainer/Bookcase1"), NodePath("CenterContainer/TextureRect/GridContainer/Bookcase2"), NodePath("CenterContainer/TextureRect/GridContainer/Bookcase3"), NodePath("CenterContainer/TextureRect/GridContainer/Bookcase4"), NodePath("CenterContainer/TextureRect/GridContainer/Bookcase5"), NodePath("CenterContainer/TextureRect/GridContainer/Bookcase6"), NodePath("CenterContainer/TextureRect/GridContainer/Bookcase7")]
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1491147776]
 layout_mode = 1
