@@ -22,7 +22,7 @@
     "case": 4,
     "shelf": 0,
     "position": 6,
-    "text": "When did I write this, and how did the book get here filled with my own words? How did it get here filled with my own thoughts? How can I tell if any of what I did meant anything? Will I die without knowing?\n\no o o o\nx o o o",
+    "text": "When did I write this, and how did the book get here filled with my own words? How did it get here filled with my own thoughts? How can I tell if any of what I did meant anything? Will I die without knowing?\nWill I die without knowing?\n\no o o o\nx o o o",
     "overlay_texture": "res://resources/special_books/special_book_big.tres",
     "bookcase_texture": "res://resources/special_books/special_book_small.tres"
   },

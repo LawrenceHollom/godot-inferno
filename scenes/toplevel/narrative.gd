@@ -1,10 +1,12 @@
 class_name NarrativePresentation
 extends Control
 
+# What a crazy design decision to have this here.
 enum Presentation {
     INTRO,
     PAST,
     ASHES,
+	GAME,
 }
 
 const BACKGROUNDS_PATH := "res://assets/backgrounds"

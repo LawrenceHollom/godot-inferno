@@ -35,13 +35,13 @@
         "type": "text",
         "speaker": 1,
         "position": "bottom",
-        "text": "Where am I?."
+        "text": "Where am I?"
       },
       {
         "type": "text",
         "speaker": 0,
         "position": "top",
-        "text": "You are in --"
+        "text": "You are in..."
       }
     ]
   },
@@ -105,7 +105,7 @@
       }
     ]
   },
-  "SCREEN": {
+  "GAME": {
     "palette": "FIRE",
     "actions": [
       {

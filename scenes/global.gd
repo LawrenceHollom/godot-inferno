@@ -28,17 +28,17 @@ var current_palette: PaletteData.Palette = PaletteData.Palette.FIRE
 var next_palette: PaletteData.Palette = PaletteData.Palette.ASH
 
 enum CurrentScene {
-	INTRO,
-	BABEL,
-	NARRATIVE,
-	CONCLUSION,
+    INTRO,
+    BABEL,
+    NARRATIVE,
+    CONCLUSION,
 }
 
 enum TransitionType {
-	INTRO,
-	LONG,
-	SHORT,
-	OUTRO,
+    INTRO,
+    LONG,
+    SHORT,
+    OUTRO,
 }
 
 var transition_type: TransitionType = TransitionType.INTRO
@@ -53,85 +53,87 @@ var state: CurrentScene = CurrentScene.INTRO
 
 
 func _ready() -> void:
-	narrative_data = NarrativeData.load_all()
+    narrative_data = NarrativeData.load_all()
 
 
 func get_room_name(room_code: String) -> String:
-	return room_namer.get_room_name(room_code)
+    return room_namer.get_room_name(room_code)
 
 
 func get_next_room_word(room_code: String, door: int) -> String:
-	print("Getting next room thing: ", room_code, " door = ", door)
-	return room_namer.get_next_room_word(room_code, door)
+    print("Getting next room thing: ", room_code, " door = ", door)
+    return room_namer.get_next_room_word(room_code, door)
 
 
 func get_book_text(room_name: String, shelf_number: int, book_number: int, case_number: int) -> String:
-	return book_controller.get_book(room_name, shelf_number, book_number, case_number)
+    return book_controller.get_book(room_name, shelf_number, book_number, case_number)
 
 
 func set_help_text(text: String) -> void:
-	help_text = text
-	help_text_set.emit()
+    help_text = text
+    help_text_set.emit()
 
 
 # Called when the player successfully exists Babel.
 func on_babel_win() -> void:
-	print("You are big winner!")
-	state = CurrentScene.CONCLUSION
-	next_palette = PaletteData.Palette.ASH
-	fade_out.emit()
+    print("You are big winner!")
+    state = CurrentScene.CONCLUSION
+    next_palette = PaletteData.Palette.ASH
+    fade_out.emit()
 
 
 func get_presentation_name() -> String:
-	match state:
-		CurrentScene.INTRO:
-			return "INTRO"
-		CurrentScene.BABEL:
-			return ""
-		CurrentScene.NARRATIVE:
-			return NARRATIVE[narrative_index]
-	return ""
+    match state:
+        CurrentScene.INTRO:
+            return "INTRO"
+        CurrentScene.BABEL:
+            return ""
+        CurrentScene.NARRATIVE:
+            return NARRATIVE[narrative_index % len(NARRATIVE)]
+    return ""
 
 
 func get_narrative_data(presentation_name: String) -> NarrativeData:
-	if not narrative_data.has(presentation_name):
-		push_error("Narrative data '%s' was not loaded." % presentation_name)
-		return null
-	return narrative_data[presentation_name]
+    if not narrative_data.has(presentation_name):
+        push_error("Narrative data '%s' was not loaded." % presentation_name)
+        return null
+    return narrative_data[presentation_name]
 
 
 
 func next_standard_scene() -> void:
-	match state:
-		# CurrentScene.INTRO:
-		# 	state = CurrentScene.CONCLUSION
-		# 	next_palette = PaletteData.Palette.ASH
-		CurrentScene.INTRO:
-			state = CurrentScene.BABEL
-			next_palette = PaletteData.Palette.FIRE
-		CurrentScene.BABEL:
-			state = CurrentScene.NARRATIVE
-			next_palette = narrative_data[get_presentation_name()].palette
-		CurrentScene.NARRATIVE:
-			state = CurrentScene.BABEL
-			next_palette = PaletteData.Palette.FIRE
-	fade_out.emit()
+    match state:
+        # CurrentScene.INTRO:
+        # 	state = CurrentScene.CONCLUSION
+        # 	next_palette = PaletteData.Palette.ASH
+        CurrentScene.INTRO:
+            state = CurrentScene.BABEL
+            next_palette = PaletteData.Palette.FIRE
+        CurrentScene.BABEL:
+            state = CurrentScene.NARRATIVE
+            print("Moving to standard scene ", get_presentation_name())
+            next_palette = narrative_data[get_presentation_name()].palette
+        CurrentScene.NARRATIVE:
+            state = CurrentScene.BABEL
+            narrative_index += 1
+            next_palette = PaletteData.Palette.FIRE
+    fade_out.emit()
 
 
 
 func on_fade_out_finished() -> void:
-	get_tree().change_scene_to_file("res://scenes/toplevel/transition.tscn")
+    get_tree().change_scene_to_file("res://scenes/toplevel/transition.tscn")
 
 
 func on_transition_finished() -> void:
-	current_palette = next_palette
-	match state:
-		CurrentScene.INTRO:
-			get_tree().change_scene_to_file("res://scenes/toplevel/narrative.tscn")
-			transition_type = TransitionType.LONG
-		CurrentScene.BABEL:
-			get_tree().change_scene_to_file("res://scenes/toplevel/babel.tscn")
-		CurrentScene.NARRATIVE:
-			get_tree().change_scene_to_file("res://scenes/toplevel/narrative.tscn")
-		CurrentScene.CONCLUSION:
-			get_tree().change_scene_to_file("res://scenes/toplevel/conclusion.tscn")
+    current_palette = next_palette
+    match state:
+        CurrentScene.INTRO:
+            get_tree().change_scene_to_file("res://scenes/toplevel/narrative.tscn")
+            transition_type = TransitionType.LONG
+        CurrentScene.BABEL:
+            get_tree().change_scene_to_file("res://scenes/toplevel/babel.tscn")
+        CurrentScene.NARRATIVE:
+            get_tree().change_scene_to_file("res://scenes/toplevel/narrative.tscn")
+        CurrentScene.CONCLUSION:
+            get_tree().change_scene_to_file("res://scenes/toplevel/conclusion.tscn")
