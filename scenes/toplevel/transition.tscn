@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://d3lnhx36odyjv" path="res://assets/backgrounds/flowers.png" id="8_4w86k"]
 [ext_resource type="Texture2D" uid="uid://bby0aoge76mi6" path="res://assets/backgrounds/Death_close.png" id="8_yx6it"]
 [ext_resource type="Shader" uid="uid://tarbb3hyrdp1" path="res://scripts/palette_swap.gdshader" id="9_palette"]
+[ext_resource type="AudioStream" uid="uid://dfb7y8lydr6vr" path="res://assets/audio/220892__diboz__ibrkr01_kick.ogg" id="13_8ocmm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_palette"]
 shader = ExtResource("9_palette")
@@ -22,7 +23,7 @@ shader_parameter/target_light = Color(1, 0.92549, 0.81569, 1)
 shader_parameter/target_medium = Color(0.88627, 0.29804, 0.21569, 1)
 shader_parameter/target_dark = Color(0.43922, 0.05882, 0.08627, 1)
 
-[node name="Transition" type="Control" unique_id=435532729 node_paths=PackedStringArray("colour_rect", "texture_rect", "label")]
+[node name="Transition" type="Control" unique_id=435532729 node_paths=PackedStringArray("colour_rect", "texture_rect", "label", "drum")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,6 +40,7 @@ death = Array[Texture2D]([ExtResource("6_xfi4b"), ExtResource("7_8ocmm"), ExtRes
 babel = ExtResource("6_003ll")
 tree = ExtResource("7_xfi4b")
 flower = ExtResource("8_4w86k")
+drum = NodePath("DrumSound")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1965167175]
 layout_mode = 1
@@ -70,3 +72,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="DrumSound" type="AudioStreamPlayer" parent="." unique_id=1791937446]
+stream = ExtResource("13_8ocmm")
