@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkeuo2ii5hhvi"
-path="res://.godot/imported/background.png-51d1579c4359080ae5fbef51ef532583.ctex"
+uid="uid://2bvupksfbjiu"
+path="res://.godot/imported/small_books.png-2d2ec79bfe94ca8bbf6a227122f60a4c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/game/background.png"
-dest_files=["res://.godot/imported/background.png-51d1579c4359080ae5fbef51ef532583.ctex"]
+source_file="res://assets/game/small_books.png"
+dest_files=["res://.godot/imported/small_books.png-2d2ec79bfe94ca8bbf6a227122f60a4c.ctex"]
 
 [params]
 

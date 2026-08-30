@@ -58,6 +58,10 @@ func get_room_name(room_code: String) -> String:
 	return " ".join(words)
 
 
+func get_next_room_word(room_code: String, door: int) -> String:
+	return room_words[room_code + str(door)]
+
+
 func _is_valid_room_code(room_code: String) -> bool:
 	if room_code.is_empty():
 		return false

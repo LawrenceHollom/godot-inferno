@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://bt5g7f5qviv6i"]
 
+[ext_resource type="Script" uid="uid://doxytdm0r4tcu" path="res://scenes/babel/babel_room.gd" id="1_7y271"]
 [ext_resource type="Texture2D" uid="uid://o8qi8dtlbkup" path="res://assets/backgrounds/babel.png" id="1_ffjih"]
+[ext_resource type="PackedScene" uid="uid://db1r42t1fegtc" path="res://scenes/babel/bookcase.tscn" id="3_pda4t"]
 
 [node name="BabelRoom" type="Control" unique_id=1779074826]
 layout_mode = 3
@@ -9,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_7y271")
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1491147776]
 layout_mode = 1
@@ -21,3 +24,51 @@ grow_vertical = 2
 [node name="TextureRect" type="TextureRect" parent="CenterContainer" unique_id=1684834464]
 layout_mode = 2
 texture = ExtResource("1_ffjih")
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/TextureRect" unique_id=1660726556]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -16.0
+offset_right = 8.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 4
+
+[node name="Bookcase0" parent="CenterContainer/TextureRect/GridContainer" unique_id=1437709389 instance=ExtResource("3_pda4t")]
+layout_mode = 2
+
+[node name="Bookcase1" parent="CenterContainer/TextureRect/GridContainer" unique_id=123054513 instance=ExtResource("3_pda4t")]
+layout_mode = 2
+case_number = 1
+
+[node name="Bookcase2" parent="CenterContainer/TextureRect/GridContainer" unique_id=1151924135 instance=ExtResource("3_pda4t")]
+layout_mode = 2
+case_number = 2
+
+[node name="Bookcase3" parent="CenterContainer/TextureRect/GridContainer" unique_id=2111135011 instance=ExtResource("3_pda4t")]
+layout_mode = 2
+case_number = 3
+
+[node name="Bookcase4" parent="CenterContainer/TextureRect/GridContainer" unique_id=799055982 instance=ExtResource("3_pda4t")]
+layout_mode = 2
+case_number = 4
+
+[node name="Bookcase5" parent="CenterContainer/TextureRect/GridContainer" unique_id=2045175262 instance=ExtResource("3_pda4t")]
+layout_mode = 2
+case_number = 5
+
+[node name="Bookcase6" parent="CenterContainer/TextureRect/GridContainer" unique_id=1469838812 instance=ExtResource("3_pda4t")]
+layout_mode = 2
+case_number = 6
+
+[node name="Bookcase7" parent="CenterContainer/TextureRect/GridContainer" unique_id=638102687 instance=ExtResource("3_pda4t")]
+layout_mode = 2
+case_number = 7

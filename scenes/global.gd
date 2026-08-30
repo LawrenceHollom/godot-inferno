@@ -46,6 +46,11 @@ func get_room_name(room_code: String) -> String:
 	return room_namer.get_room_name(room_code)
 
 
+func get_next_room_word(room_code: String, door: int) -> String:
+	print("Getting next room thing: ", room_code, " door = ", door)
+	return room_namer.get_next_room_word(room_code, door)
+
+
 func get_book_text(room_name: String, shelf_number: int, book_number: int, case_number: int) -> String:
 	return book_controller.get_book(room_name, shelf_number, book_number, case_number)
 

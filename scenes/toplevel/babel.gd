@@ -5,6 +5,9 @@ const EXIT_ROOM = "000000000"
 @export var player: Player
 @export var fire: Fire
 
+@export var room1: BabelRoom
+@export var room2: BabelRoom
+
 @export var room_name_label: Label
 @export var timer_label: Label
 @export var book_overlay: BookOverlay
@@ -14,7 +17,12 @@ const EXIT_ROOM = "000000000"
 
 @export var room_id: Array[int] # The id is a sequence of 1, 2, 3
 
+@export var room_name_labels: Array[Label]
+
 var entry_door_index: int = 0
+
+var active_room: BabelRoom
+var inactive_room: BabelRoom
 
 var time_left: int
 
@@ -24,6 +32,12 @@ func _ready() -> void:
 	room_id = []
 	time_left = GlobalState.BABEL_LIFETIME
 	book_overlay.visible = false
+	active_room = room1
+	inactive_room = room2
+	active_room.visible = true
+	active_room.position = Vector2.ZERO
+	inactive_room.visible = false
+	setup_room_name_labels()
 
 
 func _on_player_moved_to(pos: Vector2i) -> void:
@@ -46,6 +60,18 @@ func _on_player_moved_to(pos: Vector2i) -> void:
 
 
 func move_room(door_index: int) -> void:
+	player.is_running = false
+	player.visible = false
+	for label in room_name_labels:
+		label.text = ""
+	active_room.slerp_out(door_index)
+	inactive_room.slerp_in(door_index)
+	await active_room.move_finished
+
+	var tmp: BabelRoom = active_room
+	active_room = inactive_room
+	inactive_room = tmp
+
 	if door_index == 0:
 		entry_door_index = room_id.pop_back()
 		player.set_grid_position(door_pos[entry_door_index - 1])
@@ -53,7 +79,16 @@ func move_room(door_index: int) -> void:
 		entry_door_index = 0
 		room_id.push_back(door_index)
 		player.reset_to_room_start()
+	player.is_running = true
+	player.visible = true
+	setup_room_name_labels()
+
+
+func setup_room_name_labels() -> void:
 	var room_code: String = get_room_code()
+	for i in range(3):
+		var next_word: String = GlobalState.get_next_room_word(room_code, (i + GlobalState.DECODER[len(room_code)]) % 3)
+		room_name_labels[(i + 2) % 3].text = next_word
 	room_name_label.text = GlobalState.get_room_name(room_code)
 	if room_code == EXIT_ROOM:
 		GlobalState.on_babel_win()

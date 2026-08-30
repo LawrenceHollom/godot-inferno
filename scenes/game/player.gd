@@ -14,6 +14,8 @@ var grid_position: Vector2i
 
 var is_running: bool
 
+const OFFSET := Vector2(-4, 0)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	open_cells = []
@@ -24,13 +26,12 @@ func _ready() -> void:
 			var is_cell_open: bool = room_layout.is_cell_open(x, y)
 			open_cells[y].push_back(is_cell_open)
 
-	grid_position = start_pos
-	position = Vector2(grid_position * GameState.CELL_SIZE)
+	set_grid_position(start_pos)
 
 
 func set_grid_position(target: Vector2i) -> void:
 	grid_position = target
-	position = Vector2(grid_position * GameState.CELL_SIZE)
+	position = Vector2(grid_position * GameState.CELL_SIZE) + OFFSET
 
 
 func reset_to_room_start() -> void:

@@ -175,7 +175,6 @@ func _open_selected_book() -> void:
 	)
 	highlight.hide()
 	book_container.show()
-	print("Are we running anything here? text = ", full_text)
 	book_pages = _paginate_text(full_text)
 	current_page = 0
 	_show_current_page()

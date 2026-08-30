@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://db1r42t1fegtc"]
+
+[ext_resource type="Script" uid="uid://bolhyd2entwsu" path="res://scenes/babel/bookcase.gd" id="1_6rtst"]
+[ext_resource type="Texture2D" uid="uid://2bvupksfbjiu" path="res://assets/game/small_books.png" id="2_books"]
+
+[node name="Bookcase" type="Control" unique_id=681979590 node_paths=PackedStringArray("grid")]
+custom_minimum_size = Vector2(16, 32)
+custom_maximum_size = Vector2(16, 32)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 172.0
+offset_top = 104.0
+offset_right = -172.0
+offset_bottom = -104.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6rtst")
+book_atlas = ExtResource("2_books")
+grid = NodePath("GridContainer")
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=242621500]
+custom_minimum_size = Vector2(14, 24)
+layout_mode = 0
+offset_left = 1.0
+offset_top = 4.0
+offset_right = 15.0
+offset_bottom = 28.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 1
