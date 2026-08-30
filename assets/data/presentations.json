@@ -4,11 +4,13 @@
     "actions": [
       {
         "type": "text",
+        "speaker": 1,
         "position": "bottom",
         "text": "Where am I?"
       },
       {
         "type": "text",
+        "speaker": 0,
         "position": "top",
         "text": "There will be three doors."
       },
@@ -19,21 +21,25 @@
       },
       {
         "type": "text",
+        "speaker": 1,
         "position": "bottom",
         "text": "What?"
       },
       {
         "type": "text",
+        "speaker": 0,
         "position": "top",
         "text": "There will be three doors. You will choose your path"
       },
       {
         "type": "text",
+        "speaker": 1,
         "position": "bottom",
         "text": "Where am I?."
       },
       {
         "type": "text",
+        "speaker": 0,
         "position": "top",
         "text": "You are in --"
       }
@@ -49,21 +55,24 @@
       },
       {
         "type": "text",
+        "speaker": 0,
         "position": "top",
         "text": "I wrote I know I wrote / pages and pages I filled books / with overflowing ideas."
       },
       {
         "type": "text",
+        "speaker": 1,
         "position": "bottom",
         "text": "But where are they now / did they go anywhere were / they read did they mean / anything?"
       },
       {
         "type": "fade_out",
-        "image": "background.png",
+        "image": "growth.png",
         "duration": 1.0
       },
       {
         "type": "text",
+        "speaker": 0,
         "position": "middle",
         "text": "Remember: follow the sparks / Read the books / Follow the sparks"
       }
@@ -74,22 +83,24 @@
     "actions": [
       {
         "type": "fade_in",
-        "image": "babel_ash.png",
+        "image": "rembrandt.png",
         "duration": 1.0
       },
       {
         "type": "text",
+        "speaker": 0,
         "position": "top",
         "text": "Was it merely the journey / of creating these worlds / not walked by any step / but mine"
       },
       {
         "type": "text",
+        "speaker": 1,
         "position": "bottom",
         "text": "I have walked in / trails but who / will follow mine"
       },
       {
         "type": "fade_out",
-        "image": "babel_ash.png",
+        "image": "rembrandt.png",
         "duration": 1.0
       }
     ]

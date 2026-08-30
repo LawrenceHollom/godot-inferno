@@ -15,6 +15,8 @@ const ANIMATION_DURATION: float = 0.12
 @export var open_close_sound: AudioStreamPlayer
 @export var page_sound: AudioStreamPlayer
 
+signal pass_time
+
 ## All books in shelf order, with each shelf ordered left to right.
 var books: Array[Book] = []
 var shelves: Array[Array] = []
@@ -86,6 +88,7 @@ func _unhandled_input(event: InputEvent) -> void:
 ## Updates the room used for every book's deterministic text and image choices.
 ## This may be called before or after the overlay enters the scene tree.
 func configure(new_room_code: String, new_case_number: int) -> void:
+	pass_time.emit()
 	open_close_sound.play()
 	room_code = new_room_code
 	case_number = new_case_number
@@ -96,6 +99,7 @@ func configure(new_room_code: String, new_case_number: int) -> void:
 		book_container.hide()
 		highlight.show()
 		call_deferred("_update_highlight")
+	GlobalState.set_help_text("Use arrows/wasd and press Enter or click to open a book. Press Esc to exit.")
 
 
 func _read_books() -> void:
@@ -119,6 +123,7 @@ func _read_books() -> void:
 		for book_number: int in shelf_books.size():
 			var book: Book = shelf_books[book_number]
 			book.configure(room_code, shelf_number, book_number, case_number)
+			_connect_book_mouse_input(book)
 			books.append(book)
 			if GlobalState.book_controller.get_special_book(
 				room_code,
@@ -137,6 +142,58 @@ func _read_books() -> void:
 			0,
 			shelves[selected_shelf_number].size() - 1,
 		)
+	_update_highlight()
+
+
+func _connect_book_mouse_input(book: Book) -> void:
+	book.mouse_filter = Control.MOUSE_FILTER_STOP
+	book.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+
+	var mouse_entered_callback := _on_book_mouse_entered.bind(book)
+	if not book.mouse_entered.is_connected(mouse_entered_callback):
+		book.mouse_entered.connect(mouse_entered_callback)
+
+	var gui_input_callback := _on_book_gui_input.bind(book)
+	if not book.gui_input.is_connected(gui_input_callback):
+		book.gui_input.connect(gui_input_callback)
+
+
+func _on_book_mouse_entered(book: Book) -> void:
+	_select_book(book)
+
+
+func _on_book_gui_input(event: InputEvent, book: Book) -> void:
+	if (
+		event is InputEventMouseButton
+		and event.button_index == MOUSE_BUTTON_LEFT
+		and event.pressed
+		and not input_locked
+		and not book_container.visible
+	):
+		_select_book(book)
+		_open_selected_book()
+		book.accept_event()
+
+
+func _select_book(book: Book) -> void:
+	if input_locked or book_container.visible:
+		return
+	if book.shelf_number < 0 or book.shelf_number >= shelves.size():
+		return
+	if book.book_number < 0 or book.book_number >= shelves[book.shelf_number].size():
+		return
+	if shelves[book.shelf_number][book.book_number] != book:
+		return
+
+	var selection_changed := (
+		selected_shelf_number != book.shelf_number
+		or selected_book_number != book.book_number
+	)
+	selected_shelf_number = book.shelf_number
+	selected_book_number = book.book_number
+	if selection_changed:
+		click_randomiser.play_random_stream()
+	_update_highlight()
 
 
 func _find_books(parent: Node, result: Array[Book]) -> void:
@@ -206,8 +263,10 @@ func _open_selected_book() -> void:
 	book_container.show()
 	book_pages = _paginate_text(full_text)
 	current_page = 0
+	pass_time.emit()
 	_show_current_page()
 	_animate_in(book_container)
+	GlobalState.set_help_text("Press Esc to exit book view")
 
 
 func _close_book() -> void:

@@ -73,12 +73,7 @@ func _update_particles() -> void:
 
 
 func _on_player_moved_to(pos: Vector2i) -> void:
-	time_left -= 1
-	arrow.rotation = -2.0 * PI * (time_left as float) / 100.0
-	timer_label.text = str(time_left)
-	var intensity: float = 1.0 - (time_left as float / GlobalState.BABEL_LIFETIME as float)
-	fire.set_intensity(intensity) 
-
+	pass_time()
 	if pos == door_pos[0]:
 		move_room(1)
 	elif pos == door_pos[1]:
@@ -90,6 +85,14 @@ func _on_player_moved_to(pos: Vector2i) -> void:
 			move_room(0)
 		else:
 			GlobalState.set_help_text("You cannot walk out into the blaze")
+
+	
+func pass_time() -> void:
+	time_left -= 1
+	arrow.rotation = -2.0 * PI * (time_left as float) / 100.0
+	timer_label.text = str(time_left)
+	var intensity: float = 1.0 - (time_left as float / GlobalState.BABEL_LIFETIME as float)
+	fire.set_intensity(intensity) 
 
 	if time_left == 0:
 		player.is_running = false
@@ -157,6 +160,10 @@ func _on_player_interacted_with(pos: Vector2i) -> void:
 	book_overlay.configure(get_room_code(), case_num)
 	book_overlay.visible = true
 	print("Interacts with case number", case_num)
+
+
+func _on_book_overlay_pass_time() -> void:
+	pass_time()
 
 
 func _on_fade_out() -> void:

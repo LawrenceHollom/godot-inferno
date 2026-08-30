@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bjjk1m4qwqitu" path="res://scenes/presentation/fire.tscn" id="3_qnq0j"]
 [ext_resource type="Shader" uid="uid://bkeqh4u5n1loi" path="res://scripts/fire.gdshader" id="4_ekag3"]
 [ext_resource type="PackedScene" uid="uid://b1d81iwgmgv68" path="res://scenes/audio/click_randomiser.tscn" id="5_qnq0j"]
+[ext_resource type="AudioStream" uid="uid://bexti2bh6k6hg" path="res://assets/audio/fire.ogg" id="6_ekag3"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_uv28j"]
 
@@ -70,3 +71,8 @@ material = SubResource("ShaderMaterial_f47sq")
 layout_mode = 1
 
 [node name="ClickRandomiser" parent="." unique_id=1579339688 instance=ExtResource("5_qnq0j")]
+
+[node name="FireSound" type="AudioStreamPlayer" parent="." unique_id=2021989567]
+stream = ExtResource("6_ekag3")
+autoplay = true
+parameters/looping = true

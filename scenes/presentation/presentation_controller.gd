@@ -24,9 +24,9 @@ enum PlaybackState {
 @export_range(1.0, 120.0, 1.0) var characters_per_second: float = 30.0
 ## Extra delay after commas, sentence endings, colons, semicolons, and dashes.
 @export_range(0.0, 1.0, 0.01) var punctuation_pause: float = 0.15
-## Short speech clip played once for each typed letter or number.
-@export var talking_sound: AudioStream
-@export_range(-80.0, 24.0, 0.1) var talking_sound_volume_db: float = -10.0
+## Speech clips indexed by the speaker number used in presentation data.
+@export var speaker_sounds: Array[AudioStream] = []
+@export_range(-80.0, 24.0, 0.1) var talking_sound_volume_db: float = -3.0
 
 var _state: PlaybackState = PlaybackState.IDLE
 var _active_label: RichTextLabel
@@ -37,7 +37,6 @@ var _talking_sound_player: AudioStreamPlayer
 
 func _ready() -> void:
 	_talking_sound_player = AudioStreamPlayer.new()
-	_talking_sound_player.stream = talking_sound
 	_talking_sound_player.volume_db = talking_sound_volume_db
 	if AudioServer.get_bus_index("Sfx") >= 0:
 		_talking_sound_player.bus = "Sfx"
@@ -71,9 +70,11 @@ func advance() -> void:
 
 
 ## Types [param message] into [param label], then waits for the player to advance.
-## Pass a positive [param speed] to override [member characters_per_second].
-func say(label: RichTextLabel, message: String, speed: float = -1.0) -> void:
+## Pass a positive [param speed] to override [member characters_per_second]. The
+## [param speaker] selects a clip from [member speaker_sounds].
+func say(label: RichTextLabel, message: String, speed: float = -1.0, speaker: int = 0) -> void:
 	_active_label = label
+	_set_speaker_sound(speaker)
 	label.text = message
 	label.visible_characters = 0
 	label.show()
@@ -88,7 +89,7 @@ func say(label: RichTextLabel, message: String, speed: float = -1.0) -> void:
 		if _state == PlaybackState.TYPING:
 			var character: String = message[label.visible_characters]
 			label.visible_characters += 1
-			if talking_sound != null and not SILENT_CHARACTERS.contains(character):
+			if _talking_sound_player.stream != null and not SILENT_CHARACTERS.contains(character):
 				_talking_sound_player.play()
 			if PAUSING_PUNCTUATION.contains(character) and punctuation_pause > 0.0:
 				await get_tree().create_timer(punctuation_pause).timeout
@@ -99,6 +100,14 @@ func say(label: RichTextLabel, message: String, speed: float = -1.0) -> void:
 	_state = PlaybackState.IDLE
 	_active_label.text = ""
 	_active_label = null
+
+
+func _set_speaker_sound(speaker: int) -> void:
+	if speaker < 0 or speaker >= speaker_sounds.size():
+		push_warning("No talking sound configured for speaker %d." % speaker)
+		_talking_sound_player.stream = null
+		return
+	_talking_sound_player.stream = speaker_sounds[speaker]
 
 
 ## Fades [param item] in. Advancing during the fade completes it immediately.

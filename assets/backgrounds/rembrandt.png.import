@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://di4nimblr08cp"
-path="res://.godot/imported/babel_ash.png-88c0e403b754dec636258ac6dbf6f9c5.ctex"
+uid="uid://c6v827najdm68"
+path="res://.godot/imported/rembrandt.png-d2e83f7d9273b6daf7741ad804c437c7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/backgrounds/babel_ash.png"
-dest_files=["res://.godot/imported/babel_ash.png-88c0e403b754dec636258ac6dbf6f9c5.ctex"]
+source_file="res://assets/backgrounds/rembrandt.png"
+dest_files=["res://.godot/imported/rembrandt.png-d2e83f7d9273b6daf7741ad804c437c7.ctex"]
 
 [params]
 

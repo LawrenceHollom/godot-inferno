@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://d1yali3ilih14" path="res://assets/backgrounds/conc.png" id="2_bwxtf"]
 [ext_resource type="PackedScene" uid="uid://bg55h5hk06yg8" path="res://scenes/game/player.tscn" id="3_4i8ur"]
 [ext_resource type="PackedScene" uid="uid://cswairgqalnri" path="res://scenes/ui/help_label.tscn" id="7_d363p"]
+[ext_resource type="PackedScene" uid="uid://bjjk1m4qwqitu" path="res://scenes/presentation/fire.tscn" id="8_k5qhi"]
+[ext_resource type="Shader" uid="uid://bkeqh4u5n1loi" path="res://scripts/fire.gdshader" id="9_pabam"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_anglu"]
 texture = ExtResource("2_4i8ur")
@@ -16,7 +18,31 @@ texture = ExtResource("2_4i8ur")
 [sub_resource type="TileSet" id="TileSet_5fyiw"]
 sources/0 = SubResource("TileSetAtlasSource_anglu")
 
-[node name="Conclusion" type="Control" unique_id=1364852962 node_paths=PackedStringArray("player", "overlay")]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uv28j"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_01qhj"]
+noise = SubResource("FastNoiseLite_uv28j")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tfqr2"]
+resource_local_to_scene = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sd3s0"]
+noise = SubResource("FastNoiseLite_tfqr2")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4i830"]
+resource_local_to_scene = true
+shader = ExtResource("9_pabam")
+shader_parameter/screen_size = Vector2(360, 240)
+shader_parameter/light_colour = Color(1, 0.9254902, 0.8156863, 1)
+shader_parameter/mid_colour = Color(0.8862745, 0.29803923, 0.21568628, 1)
+shader_parameter/dark_colour = Color(0.8862745, 0.29803923, 0.21568628, 1)
+shader_parameter/intensity = 0.0
+shader_parameter/noise_large = SubResource("NoiseTexture2D_01qhj")
+shader_parameter/noise_small = SubResource("NoiseTexture2D_sd3s0")
+
+[node name="Conclusion" type="Control" unique_id=1364852962 node_paths=PackedStringArray("player", "overlay", "fire")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,6 +55,7 @@ player = NodePath("Player")
 door_pos = Array[Vector2i]([Vector2i(8, 5), Vector2i(11, 5), Vector2i(14, 5)])
 back_door_pos = Vector2i(11, 11)
 overlay = NodePath("Overlay")
+fire = NodePath("Fire")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1211107297]
 layout_mode = 1
@@ -88,5 +115,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Fire" parent="." unique_id=480503765 instance=ExtResource("8_k5qhi")]
+material = SubResource("ShaderMaterial_4i830")
+layout_mode = 0
+anchors_preset = 0
 
 [connection signal="moved_to" from="Player" to="." method="_on_player_moved_to"]

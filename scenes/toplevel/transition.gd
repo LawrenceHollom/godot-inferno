@@ -34,13 +34,17 @@ func _ready() -> void:
 func _play_intro_transition(tween: Tween):
 	tween.tween_interval(ANIMATION_DELAY)
 	_open_eye(tween)
+	_set_text_size(tween, 2)
 	_full_text_inferno(tween)
 	_set_palette(tween, GlobalState.next_palette)
 	_flash_image(tween, death[0])
+	_set_text_size(tween, 4)
 	_full_text_inferno(tween)
 	_flash_image(tween, death[1])
+	_set_text_size(tween, 6)
 	_full_text_inferno(tween)
 	_flash_image(tween, death[2])
+	_set_text_size(tween, 8)
 	_full_text_inferno(tween)
 
 			
@@ -48,14 +52,19 @@ func _play_intro_transition(tween: Tween):
 func _play_long_transition(tween: Tween):
 	GlobalState.audio_controller.play_transition()
 	tween.tween_interval(ANIMATION_DELAY)
+	_set_text_size(tween, 7)
 	_stepped_inferno(tween)
 	_open_eye(tween)
+	_set_text_size(tween, 3)
 	_full_text_inferno(tween)
 	_set_palette(tween, GlobalState.next_palette)
+	_set_text_size(tween, 5)
 	_full_text_inferno(tween)
 	_flash_image(tween, tree)
+	_set_text_size(tween, 7)
 	_full_text_inferno(tween)
 	_flash_image(tween, flower)
+	_set_text_size(tween, 9)
 	_full_text_inferno(tween)
 	_flash_image(tween, babel)
 	tween.tween_interval(ANIMATION_DELAY)
@@ -86,6 +95,9 @@ func _play_outro_transition(tween: Tween):
 	_flash_image(tween, flower)
 	_full_text_inferno(tween)
 
+
+func _set_text_size(tween: Tween, mult: int) -> void:
+	tween.tween_callback(label.add_theme_font_size_override.bind("font_size", 16 * mult))
 
 
 func _stepped_inferno(tween: Tween) -> void:

@@ -51,7 +51,8 @@ func run_presentation() -> void:
                 var label: RichTextLabel = _get_text_label(str(action.get("position", "middle")))
                 if label != null:
                     var speed: float = float(action.get("speed", -1.0))
-                    await presentation_controller.say(label, str(action.get("text", "")), speed)
+                    var speaker: int = int(action.get("speaker", 0))
+                    await presentation_controller.say(label, str(action.get("text", "")), speed, speaker)
             "fade_in":
                 var image_in: TextureRect = _get_or_create_image(str(action.get("image", "")))
                 if image_in != null:
