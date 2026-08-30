@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b2grhii80oh75" path="res://assets/backgrounds/circles.png" id="3_sd3s0"]
 [ext_resource type="PackedScene" uid="uid://cox4jr6eiq0x2" path="res://scenes/game/room_layout.tscn" id="3_u2dd0"]
 [ext_resource type="PackedScene" uid="uid://bt5g7f5qviv6i" path="res://scenes/babel/babel_room.tscn" id="3_vc7bp"]
+[ext_resource type="Texture2D" uid="uid://deapkbnyfwnfl" path="res://assets/game/arrow.png" id="4_dg2av"]
 [ext_resource type="Texture2D" uid="uid://dyo1dfv0mxgks" path="res://assets/dev/room_tileset.png" id="5_0d36k"]
 [ext_resource type="PackedScene" uid="uid://cxmegvdrwvi8j" path="res://scenes/babel/book_overlay.tscn" id="7_qankl"]
 [ext_resource type="PackedScene" uid="uid://bjjk1m4qwqitu" path="res://scenes/presentation/fire.tscn" id="8_01qhj"]
@@ -44,7 +45,7 @@ shader_parameter/intensity = 0.0
 shader_parameter/noise_large = SubResource("NoiseTexture2D_01qhj")
 shader_parameter/noise_small = SubResource("NoiseTexture2D_sd3s0")
 
-[node name="Babel" type="Control" unique_id=1198128655 node_paths=PackedStringArray("player", "fire", "room1", "room2", "room_name_label", "timer_label", "book_overlay", "particles", "room_name_labels")]
+[node name="Babel" type="Control" unique_id=1198128655 node_paths=PackedStringArray("player", "fire", "arrow", "room1", "room2", "room_name_label", "timer_label", "book_overlay", "particles", "room_name_labels")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -55,6 +56,7 @@ theme = ExtResource("1_qjtya")
 script = ExtResource("1_yrew0")
 player = NodePath("Player")
 fire = NodePath("Fire")
+arrow = NodePath("Arrow")
 room1 = NodePath("BabelRoom1")
 room2 = NodePath("BabelRoom2")
 room_name_label = NodePath("RoomNameDebug")
@@ -74,10 +76,19 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_sd3s0")
 
+[node name="Arrow" type="Node2D" parent="." unique_id=124120436]
+position = Vector2(180, 120)
+
+[node name="Sprite2D" type="Sprite2D" parent="Arrow" unique_id=777663001]
+position = Vector2(0, -60)
+texture = ExtResource("4_dg2av")
+
 [node name="BabelRoom1" parent="." unique_id=1779074826 instance=ExtResource("3_vc7bp")]
+visible = false
 layout_mode = 1
 
 [node name="BabelRoom2" parent="." unique_id=143869391 instance=ExtResource("3_vc7bp")]
+visible = false
 layout_mode = 1
 offset_top = -144.0
 offset_bottom = -144.0
@@ -200,8 +211,8 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_colors/font_outline_color = Color(0.4392157, 0.05882353, 0.08627451, 1)
-theme_override_constants/outline_size = 2
+theme_override_colors/font_outline_color = Color(0.44, 0.057199996, 0.08271998, 1)
+theme_override_constants/outline_size = 4
 
 [connection signal="interacted_with" from="Player" to="." method="_on_player_interacted_with"]
 [connection signal="moved_to" from="Player" to="." method="_on_player_moved_to"]

@@ -25,10 +25,10 @@ func get_visible_special_book() -> TextureRect:
 			return special_book
 	return null
 
-func get_offset_for_room_move(door: int) -> Vector2:
+func get_offset_for_room_move(door: int, last_forward_door: int) -> Vector2:
 	match door:
 		0:
-			return Vector2(0, Y_OFF)
+			return Vector2((2 - last_forward_door) * X_OFF, Y_OFF)
 		1:
 			return Vector2(-X_OFF, -Y_OFF)
 		2:
@@ -37,18 +37,18 @@ func get_offset_for_room_move(door: int) -> Vector2:
 			return Vector2(X_OFF, -Y_OFF)
 	return Vector2(99, 99)
 
-func slerp_in(door: int) -> void:
-	position = get_offset_for_room_move(door)
+func slerp_in(door: int, entry_door_index: int) -> void:
+	position = get_offset_for_room_move(door, entry_door_index)
 	visible = true
 	var tween := create_tween()
 	tween.tween_property(self, "position", Vector2.ZERO, MOVE_DURATION)
 	tween.tween_callback(move_finished.emit)
 
 	
-func slerp_out(door: int) -> void:
+func slerp_out(door: int, entry_door_index: int) -> void:
 	position = Vector2.ZERO
 	visible = true
-	var target: Vector2 = -get_offset_for_room_move(door)
+	var target: Vector2 = -get_offset_for_room_move(door, entry_door_index)
 	var tween := create_tween()
 	tween.tween_property(self, "position", target, MOVE_DURATION)
 	tween.tween_property(self, "visible", false, 0)

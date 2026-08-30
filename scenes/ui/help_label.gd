@@ -4,7 +4,7 @@ extends Label
 var time_since_text_set: float
 var is_text_displayed: bool
 
-const TEXT_DURATION: float = 1.0
+const TEXT_DURATION: float = 2.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

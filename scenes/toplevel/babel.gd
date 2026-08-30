@@ -5,6 +5,8 @@ const EXIT_ROOM = "00" #"00000000"
 @export var player: Player
 @export var fire: Fire
 
+@export var arrow: Node2D
+
 @export var room1: BabelRoom
 @export var room2: BabelRoom
 
@@ -22,6 +24,7 @@ const EXIT_ROOM = "00" #"00000000"
 @export var room_name_labels: Array[Label]
 
 var entry_door_index: int = 0
+var last_forward_door: int = 0
 
 var active_room: BabelRoom
 var inactive_room: BabelRoom
@@ -69,6 +72,7 @@ func _update_particles() -> void:
 
 func _on_player_moved_to(pos: Vector2i) -> void:
 	time_left -= 1
+	arrow.rotation = -2.0 * PI * (time_left as float) / 100.0
 	timer_label.text = str(time_left)
 	var intensity: float = 1.0 - (time_left as float / GlobalState.BABEL_LIFETIME as float)
 	fire.set_intensity(intensity) 
@@ -79,8 +83,11 @@ func _on_player_moved_to(pos: Vector2i) -> void:
 		move_room(2)
 	elif pos == door_pos[2]:
 		move_room(3)
-	elif pos == back_door_pos and len(room_id) >= 1:
-		move_room(0)
+	elif pos == back_door_pos:
+		if len(room_id) >= 1:
+			move_room(0)
+		else:
+			GlobalState.set_help_text("You cannot walk out into the blaze")
 
 	if time_left == 0:
 		player.is_running = false
@@ -93,14 +100,16 @@ func move_room(door_index: int) -> void:
 	player.is_running = false
 	player.visible = false
 	var code: String = get_room_code()
-	var next_room: String = code + str((door_index + GlobalState.DECODER[len(code)]) % 3)
-	if next_room == EXIT_ROOM:
-		GlobalState.on_babel_win()
-		return
+	if door_index >= 1:
+		last_forward_door = door_index
+		var next_room: String = code + str((door_index + GlobalState.DECODER[len(code)]) % 3)
+		if next_room == EXIT_ROOM:
+			GlobalState.on_babel_win()
+			return
 	for label in room_name_labels:
 		label.text = ""
-	active_room.slerp_out(door_index)
-	inactive_room.slerp_in(door_index)
+	active_room.slerp_out(door_index, last_forward_door)
+	inactive_room.slerp_in(door_index, last_forward_door)
 	await active_room.move_finished
 
 	var tmp: BabelRoom = active_room

@@ -9,7 +9,7 @@ extends Control
 @export var tree: Texture2D
 @export var flower: Texture2D
 
-const ANIMATION_DELAY: float = 0.4
+const ANIMATION_DELAY: float = 0.01
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
