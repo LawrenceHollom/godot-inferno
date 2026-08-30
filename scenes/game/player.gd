@@ -20,7 +20,7 @@ const OFFSET := Vector2(-4, 0)
 const CHARACTER_TEXTURE := preload("res://assets/game/Character.png")
 const SPRITESHEET_COLUMNS := 2
 const SPRITESHEET_ROWS := 4
-const ROW_ANIMATIONS := [&"down", &"up", &"left", &"right"]
+const ROW_ANIMATIONS := [&"down", &"up", &"right", &"left"]
 
 const DIRECTION_ANIMATIONS := {
 	Vector2i.DOWN: &"down",

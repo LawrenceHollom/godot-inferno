@@ -14,6 +14,7 @@ const ANIMATION_DURATION: float = 0.12
 ## All books in shelf order, with each shelf ordered left to right.
 var books: Array[Book] = []
 var shelves: Array[Array] = []
+var special_book: Book
 
 var selected_shelf_number: int = 0
 var selected_book_number: int = 0
@@ -95,6 +96,7 @@ func configure(new_room_code: String, new_case_number: int) -> void:
 func _read_books() -> void:
 	books.clear()
 	shelves.clear()
+	special_book = null
 	if shelf_root == null:
 		push_error("BookOverlay has no shelf root assigned.")
 		return
@@ -113,6 +115,13 @@ func _read_books() -> void:
 			var book: Book = shelf_books[book_number]
 			book.configure(room_code, shelf_number, book_number, case_number)
 			books.append(book)
+			if GlobalState.book_controller.get_special_book(
+				room_code,
+				shelf_number,
+				book_number,
+				case_number,
+			) != null:
+				special_book = book
 		shelves.append(shelf_books)
 		shelf_number += 1
 
@@ -169,6 +178,17 @@ func _get_selected_book() -> Book:
 	if shelves.is_empty():
 		return null
 	return shelves[selected_shelf_number][selected_book_number] as Book
+
+
+func get_visible_special_book() -> Book:
+	if (
+		is_visible_in_tree()
+		and not book_container.visible
+		and special_book != null
+		and special_book.is_visible_in_tree()
+	):
+		return special_book
+	return null
 
 
 func _open_selected_book() -> void:

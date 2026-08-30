@@ -3,6 +3,7 @@ extends Node
 class_name RoomNamer
 
 const ROOM_NAMES_PATH := "res://assets/data/room_names.json"
+const MAX_CODE_LENGTH := 8
 
 var room_words: Dictionary[String, String] = {}
 
@@ -50,16 +51,20 @@ func get_room_name(room_code: String) -> String:
 	var prefix: String = ""
 	for index: int in room_code.length():
 		prefix += room_code.substr(index, 1)
-		if room_words.has(prefix):
-			words.append(room_words[prefix])
-		else:
-			push_warning("No room-name word is defined for code '%s'." % prefix)
-			words.append("[%s]" % prefix)
+		words.append(get_word(prefix))
 	return " ".join(words)
 
 
 func get_next_room_word(room_code: String, door: int) -> String:
-	return room_words[room_code + str(door)]
+	return get_word(room_code + str(door))
+
+
+func get_word(code: String) -> String:
+	if len(code) > MAX_CODE_LENGTH:
+		return room_words[code.right(8)]
+	else:
+		return room_words[code]
+	
 
 
 func _is_valid_room_code(room_code: String) -> bool:

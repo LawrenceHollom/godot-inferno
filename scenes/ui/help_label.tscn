@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cswairgqalnri"]
+
+[ext_resource type="Script" uid="uid://dxpwjftjlkemv" path="res://scenes/ui/help_label.gd" id="1_wdkfm"]
+
+[node name="HelpLabel" type="Label" unique_id=1837068365]
+offset_right = 40.0
+offset_bottom = 23.0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_wdkfm")

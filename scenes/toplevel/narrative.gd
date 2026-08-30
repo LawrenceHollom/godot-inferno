@@ -96,11 +96,11 @@ func _get_or_create_image(filename: String) -> TextureRect:
 
     var image := TextureRect.new()
     image.name = filename.get_basename().validate_node_name()
-    image.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+    # image.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
     image.mouse_filter = Control.MOUSE_FILTER_IGNORE
     image.texture = texture
-    image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-    image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+    image.expand_mode = TextureRect.EXPAND_KEEP_SIZE 
+    image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED 
     image.hide()
     image_layers.add_child(image)
     _images[filename] = image

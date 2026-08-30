@@ -1,6 +1,6 @@
 extends Control
 
-const EXIT_ROOM = "000000000"
+const EXIT_ROOM = "00" #"00000000"
 
 @export var player: Player
 @export var fire: Fire
@@ -11,6 +11,8 @@ const EXIT_ROOM = "000000000"
 @export var room_name_label: Label
 @export var timer_label: Label
 @export var book_overlay: BookOverlay
+
+@export var particles: Node2D
 
 @export var door_pos: Array[Vector2i]
 @export var back_door_pos: Vector2i
@@ -25,6 +27,7 @@ var active_room: BabelRoom
 var inactive_room: BabelRoom
 
 var time_left: int
+var particle_target: Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -37,14 +40,38 @@ func _ready() -> void:
 	active_room.visible = true
 	active_room.position = Vector2.ZERO
 	inactive_room.visible = false
+	fire.set_intensity(0)
 	setup_room_name_labels()
+	_update_particles()
+
+
+func _process(_delta: float) -> void:
+	_update_particles()
+
+
+func _update_particles() -> void:
+	var new_target: Control
+	if book_overlay.is_visible_in_tree():
+		new_target = book_overlay.get_visible_special_book()
+	else:
+		new_target = active_room.get_visible_special_book()
+
+	var should_show := new_target != null
+	particles.visible = should_show
+	if not should_show:
+		particle_target = null
+		return
+
+	particles.global_position = new_target.get_global_transform() * (new_target.size * 0.5)
+	if new_target != particle_target:
+		particle_target = new_target
 
 
 func _on_player_moved_to(pos: Vector2i) -> void:
 	time_left -= 1
 	timer_label.text = str(time_left)
 	var intensity: float = 1.0 - (time_left as float / GlobalState.BABEL_LIFETIME as float)
-	fire.set_intensity(intensity * intensity / 2.0) 
+	fire.set_intensity(intensity) 
 
 	if pos == door_pos[0]:
 		move_room(1)
@@ -56,12 +83,20 @@ func _on_player_moved_to(pos: Vector2i) -> void:
 		move_room(0)
 
 	if time_left == 0:
-		GlobalState.next_standard_scene()
+		player.is_running = false
+		var tween := create_tween()
+		tween.tween_method(fire.set_intensity, 1.0, 3.0, 2.0)
+		tween.tween_callback(GlobalState.next_standard_scene)
 
 
 func move_room(door_index: int) -> void:
 	player.is_running = false
 	player.visible = false
+	var code: String = get_room_code()
+	var next_room: String = code + str((door_index + GlobalState.DECODER[len(code)]) % 3)
+	if next_room == EXIT_ROOM:
+		GlobalState.on_babel_win()
+		return
 	for label in room_name_labels:
 		label.text = ""
 	active_room.slerp_out(door_index)
@@ -86,13 +121,12 @@ func move_room(door_index: int) -> void:
 
 func setup_room_name_labels() -> void:
 	var room_code: String = get_room_code()
+	print("Entered room with code ", room_code)
 	active_room.setup_for_room(room_code)
 	for i in range(3):
 		var next_word: String = GlobalState.get_next_room_word(room_code, (i + GlobalState.DECODER[len(room_code)]) % 3)
 		room_name_labels[(i + 2) % 3].text = next_word
 	room_name_label.text = GlobalState.get_room_name(room_code)
-	if room_code == EXIT_ROOM:
-		GlobalState.on_babel_win()
 
 
 func get_room_code() -> String:

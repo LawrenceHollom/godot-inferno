@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7mwqbq1p57aj"
-path="res://.godot/imported/eye_half_open.png-0bf32e16aa8c978029d9a053e1f755a4.ctex"
+uid="uid://cx4hqmvotkt55"
+path="res://.godot/imported/eye_half.png-f23f75eaaeb8ede397eed7dd757f2a31.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/backgrounds/eye_half_open.png"
-dest_files=["res://.godot/imported/eye_half_open.png-0bf32e16aa8c978029d9a053e1f755a4.ctex"]
+source_file="res://assets/backgrounds/eye_half.png"
+dest_files=["res://.godot/imported/eye_half.png-f23f75eaaeb8ede397eed7dd757f2a31.ctex"]
 
 [params]
 

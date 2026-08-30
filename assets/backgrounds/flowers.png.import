@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cija2n3aft866"
-path="res://.godot/imported/three_flowers.png-2bcf19404a324cc85ce659b0a04743f8.ctex"
+uid="uid://d3lnhx36odyjv"
+path="res://.godot/imported/flowers.png-0181aea4cb11a31f278812ccd7dacc24.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/backgrounds/three_flowers.png"
-dest_files=["res://.godot/imported/three_flowers.png-2bcf19404a324cc85ce659b0a04743f8.ctex"]
+source_file="res://assets/backgrounds/flowers.png"
+dest_files=["res://.godot/imported/flowers.png-0181aea4cb11a31f278812ccd7dacc24.ctex"]
 
 [params]
 

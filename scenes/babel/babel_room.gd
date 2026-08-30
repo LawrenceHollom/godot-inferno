@@ -17,6 +17,14 @@ func setup_for_room(room_code: String):
 	for i in len(bookcases):
 		bookcases[i].configure(room_code, i)
 
+
+func get_visible_special_book() -> TextureRect:
+	for bookcase: Bookcase in bookcases:
+		var special_book: TextureRect = bookcase.get_visible_special_book()
+		if special_book != null:
+			return special_book
+	return null
+
 func get_offset_for_room_move(door: int) -> Vector2:
 	match door:
 		0:

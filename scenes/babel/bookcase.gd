@@ -13,6 +13,7 @@ const SMALL_BOOK_SIZE := Vector2i(2, 6)
 @export var grid: GridContainer
 
 var books: Array[TextureRect] = []
+var special_book: TextureRect
 
 
 func _ready() -> void:
@@ -46,9 +47,11 @@ func _create_books() -> void:
 
 
 func _update_textures() -> void:
+	special_book = null
 	for shelf_number: int in SHELF_COUNT:
 		for book_number: int in BOOKS_PER_SHELF:
-			books[shelf_number * BOOKS_PER_SHELF + book_number].texture = (
+			var book: TextureRect = books[shelf_number * BOOKS_PER_SHELF + book_number]
+			book.texture = (
 				BookAtlas.get_book_texture(
 					book_atlas,
 					SMALL_BOOK_SIZE,
@@ -59,3 +62,16 @@ func _update_textures() -> void:
 					true,
 				)
 			)
+			if GlobalState.book_controller.get_special_book(
+				room_code,
+				shelf_number,
+				book_number,
+				case_number,
+			) != null:
+				special_book = book
+
+
+func get_visible_special_book() -> TextureRect:
+	if special_book != null and special_book.is_visible_in_tree():
+		return special_book
+	return null

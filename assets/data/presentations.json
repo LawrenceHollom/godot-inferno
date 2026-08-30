@@ -14,7 +14,7 @@
       },
       {
         "type": "fade_in",
-        "image": "grim.png",
+        "image": "death.png",
         "duration": 1.0
       },
       {
@@ -61,6 +61,11 @@
         "type": "fade_out",
         "image": "background.png",
         "duration": 1.0
+      },
+      {
+        "type": "text",
+        "position": "middle",
+        "text": "Remember: follow the sparks / Read the books / Follow the sparks"
       }
     ]
   },

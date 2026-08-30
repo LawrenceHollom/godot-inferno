@@ -16,6 +16,7 @@ const DECODER: Array[int] = [3, 3, 2, 1, 1, 1, 3, 3, 2, 1, 1, 2,
 
 const NARRATIVE: Array[String] = ["PAST", "ASHES"]
 
+
 @export var room_namer: RoomNamer
 @export var book_controller: BookController
 
@@ -34,6 +35,9 @@ enum CurrentScene {
 
 # Emitted when the current scene should end and fade out in whatever way
 signal fade_out
+signal help_text_set
+
+var help_text: String
 
 var state: CurrentScene = CurrentScene.INTRO
 
@@ -55,10 +59,16 @@ func get_book_text(room_name: String, shelf_number: int, book_number: int, case_
 	return book_controller.get_book(room_name, shelf_number, book_number, case_number)
 
 
+func set_help_text(text: String) -> void:
+	help_text = text
+	help_text_set.emit()
+
+
 # Called when the player successfully exists Babel.
 func on_babel_win() -> void:
 	print("You are big winner!")
 	state = CurrentScene.CONCLUSION
+	next_palette = PaletteData.Palette.ASH
 	fade_out.emit()
 
 
@@ -83,6 +93,9 @@ func get_narrative_data(presentation_name: String) -> NarrativeData:
 
 func next_standard_scene() -> void:
 	match state:
+		# CurrentScene.INTRO:
+		# 	state = CurrentScene.CONCLUSION
+		# 	next_palette = PaletteData.Palette.ASH
 		CurrentScene.INTRO:
 			state = CurrentScene.BABEL
 			next_palette = PaletteData.Palette.FIRE
@@ -93,6 +106,7 @@ func next_standard_scene() -> void:
 			state = CurrentScene.BABEL
 			next_palette = PaletteData.Palette.FIRE
 	fade_out.emit()
+
 
 
 func on_fade_out_finished() -> void:

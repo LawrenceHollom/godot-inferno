@@ -1,19 +1,37 @@
 [
   {
     "room_code": "",
-    "case": 0,
-    "shelf": 0,
-    "position": 0,
-    "text": "This is a test special book in the first room.",
+    "case": 6,
+    "shelf": 2,
+    "position": 4,
+    "text": "Hello? Can you hear me? There's so much I've written but\n\nWill it be good?\n\no x o o\no o o o\n\nWill it be good?",
     "overlay_texture": "res://resources/special_books/special_book_big.tres",
     "bookcase_texture": "res://resources/special_books/special_book_small.tres"
   },
   {
-    "room_code": "1",
-    "case": 1,
-    "shelf": 2,
-    "position": 4,
-    "text": "This is a test special book in room one.",
+    "room_code": "1102",
+    "case": 2,
+    "shelf": 3,
+    "position": 1,
+    "text": "But what if it means nothing? What should I do if none of it means a thing? What if it means nothing?\n\no o o x\no o o o\nWhat if it means nothing?",
+    "overlay_texture": "res://resources/special_books/special_book_big.tres",
+    "bookcase_texture": "res://resources/special_books/special_book_small.tres"
+  },
+  {
+    "room_code": "20201",
+    "case": 4,
+    "shelf": 0,
+    "position": 6,
+    "text": "When did I write this, and how did the book get here filled with my own words? How did it get here filled with my own thoughts? How can I tell if any of what I did meant anything? Will I die without knowing?\n\no o o o\nx o o o",
+    "overlay_texture": "res://resources/special_books/special_book_big.tres",
+    "bookcase_texture": "res://resources/special_books/special_book_small.tres"
+  },
+  {
+    "room_code": "12120",
+    "case": 5,
+    "shelf": 1,
+    "position": 2,
+    "text": "All these questions, all these words, asking how you can know how you can ever know if anything you ever wrote was good. How can you be sure? You can't be sure. If you have to be sure don't write.\n\n? ? ? ?\n? ? ? ?",
     "overlay_texture": "res://resources/special_books/special_book_big.tres",
     "bookcase_texture": "res://resources/special_books/special_book_small.tres"
   }

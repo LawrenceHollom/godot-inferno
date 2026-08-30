@@ -18,7 +18,6 @@ text_middle = NodePath("HBoxContainer/VBoxContainer/TextMiddle")
 text_bottom = NodePath("HBoxContainer/VBoxContainer/TextBottom")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1969397618]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -68,6 +67,7 @@ layout_mode = 2
 mouse_filter = 2
 fit_content = true
 scroll_active = false
+vertical_alignment = 1
 
 [node name="TextBottom" type="RichTextLabel" parent="HBoxContainer/VBoxContainer" unique_id=896509970]
 custom_minimum_size = Vector2(0, 60)
@@ -75,6 +75,7 @@ layout_mode = 2
 mouse_filter = 2
 fit_content = true
 scroll_active = false
+vertical_alignment = 2
 
 [node name="Pad2" type="Control" parent="HBoxContainer/VBoxContainer" unique_id=1104105533]
 layout_mode = 2
