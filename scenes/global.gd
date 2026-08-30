@@ -14,7 +14,7 @@ const DECODER: Array[int] = [3, 3, 2, 1, 1, 1, 3, 3, 2, 1, 1, 2,
 3, 3, 2, 2, 2, 1, 3, 2, 1, 2, 3, 2, 2, 3, 1, 1, 2, 1, 1, 1, 2, 1, 
 3, 2, 2, 3, 1, 3, 2, 3, 3]
 
-const NARRATIVE: Array[String] = ["PAST", "ASHES"]
+const NARRATIVE: Array[String] = ["PAST", "ASHES", "GAME"]
 
 
 @export var room_namer: RoomNamer

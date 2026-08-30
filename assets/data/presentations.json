@@ -55,26 +55,26 @@
       },
       {
         "type": "text",
-        "speaker": 0,
+        "speaker": 1,
         "position": "top",
-        "text": "I wrote I know I wrote / pages and pages I filled books / with overflowing ideas."
+        "text": "I guess I'm just worried that I've done all this for nothing."
       },
       {
         "type": "text",
         "speaker": 1,
         "position": "bottom",
-        "text": "But where are they now / did they go anywhere were / they read did they mean / anything?"
+        "text": "And I'm not even sure what it would mean for it to mean something."
       },
       {
-        "type": "fade_out",
-        "image": "growth.png",
+        "type": "fade_in",
+        "image": "plain.png",
         "duration": 1.0
       },
       {
         "type": "text",
         "speaker": 0,
         "position": "middle",
-        "text": "Remember: follow the sparks / Read the books / Follow the sparks"
+        "text": "(Remember: follow the sparks / Read the books / Follow the sparks)\n(There is a special book in the first room)"
       }
     ]
   },
@@ -88,20 +88,53 @@
       },
       {
         "type": "text",
-        "speaker": 0,
+        "speaker": 1,
         "position": "top",
-        "text": "Was it merely the journey / of creating these worlds / not walked by any step / but mine"
+        "text": "Sometimes I'm so sure that I want to make things and write things and draw things but then I waste away time and never do it."
       },
       {
         "type": "text",
         "speaker": 1,
         "position": "bottom",
-        "text": "I have walked in / trails but who / will follow mine"
+        "text": "Other times I'm so scared of spending time on meaningless things that I'm afraid of doing anything."
       },
       {
         "type": "fade_out",
         "image": "rembrandt.png",
         "duration": 1.0
+      }
+    ]
+  },
+  "SCREEN": {
+    "palette": "FIRE",
+    "actions": [
+      {
+        "type": "fade_in",
+        "image": "screen.png",
+        "duration": 1.0
+      },
+      {
+        "type": "text",
+        "speaker": 1,
+        "position": "top",
+        "text": "So what's the point of spending all weekend making a game? For the journey?"
+      },
+      {
+        "type": "text",
+        "speaker": 1,
+        "position": "bottom",
+        "text": "But then why bother putting it online at the end?"
+      },
+      {
+        "type": "fade_in",
+        "image": "plain.png",
+        "duration": 1.0
+      },
+      {
+        "type": "text",
+        "speaker": 0,
+        "position": "middle",
+        "text": "(Have you found the special books yet? The ones with cryptic instructions as to the path to follow? I put them there for you. Look for the sparks.)"
       }
     ]
   }

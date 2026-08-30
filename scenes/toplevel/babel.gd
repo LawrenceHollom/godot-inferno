@@ -118,6 +118,7 @@ func move_room(door_index: int) -> void:
 	inactive_room.slerp_in(door_index, last_forward_door)
 
 	await active_room.move_finished
+	GlobalState.set_help_text("Walk into bookcases to interact with them")
 
 	var tmp: BabelRoom = active_room
 	active_room = inactive_room
