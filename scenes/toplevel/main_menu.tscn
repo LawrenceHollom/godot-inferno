@@ -1,15 +1,46 @@
 [gd_scene format=3 uid="uid://dcpcl61t1mr5"]
 
+[ext_resource type="Theme" uid="uid://b7uxclx4y81u" path="res://assets/theme/main_theme.tres" id="1_gyyeo"]
 [ext_resource type="Script" uid="uid://b80stcdcqofg" path="res://scenes/toplevel/main_menu.gd" id="1_rhtwk"]
+[ext_resource type="PackedScene" uid="uid://bjjk1m4qwqitu" path="res://scenes/presentation/fire.tscn" id="3_qnq0j"]
+[ext_resource type="Shader" uid="uid://bkeqh4u5n1loi" path="res://scripts/fire.gdshader" id="4_ekag3"]
+[ext_resource type="PackedScene" uid="uid://b1d81iwgmgv68" path="res://scenes/audio/click_randomiser.tscn" id="5_qnq0j"]
 
-[node name="MainMenu" type="Control" unique_id=119402105]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uv28j"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_01qhj"]
+noise = SubResource("FastNoiseLite_uv28j")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tfqr2"]
+resource_local_to_scene = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sd3s0"]
+noise = SubResource("FastNoiseLite_tfqr2")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f47sq"]
+resource_local_to_scene = true
+shader = ExtResource("4_ekag3")
+shader_parameter/screen_size = Vector2(360, 240)
+shader_parameter/light_colour = Color(1, 0.9254902, 0.8156863, 1)
+shader_parameter/mid_colour = Color(0.8862745, 0.29803923, 0.21568628, 1)
+shader_parameter/dark_colour = Color(0.8862745, 0.29803923, 0.21568628, 1)
+shader_parameter/intensity = 0.7490000355775
+shader_parameter/noise_large = SubResource("NoiseTexture2D_01qhj")
+shader_parameter/noise_small = SubResource("NoiseTexture2D_sd3s0")
+
+[node name="MainMenu" type="Control" unique_id=119402105 node_paths=PackedStringArray("fire", "click_randomiser")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_gyyeo")
 script = ExtResource("1_rhtwk")
+fire = NodePath("Fire")
+click_randomiser = NodePath("ClickRandomiser")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1173565383]
 layout_mode = 1
@@ -20,12 +51,22 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.4392157, 0.05882353, 0.08627451, 1)
 
-[node name="Button" type="Button" parent="." unique_id=1392596715]
-layout_mode = 0
-offset_left = 159.0
-offset_top = 97.0
-offset_right = 205.0
-offset_bottom = 128.0
-text = "Start"
+[node name="Label" type="Label" parent="." unique_id=764975492]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -74.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press right to begin"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="Fire" parent="." unique_id=480503765 instance=ExtResource("3_qnq0j")]
+material = SubResource("ShaderMaterial_f47sq")
+layout_mode = 1
+
+[node name="ClickRandomiser" parent="." unique_id=1579339688 instance=ExtResource("5_qnq0j")]

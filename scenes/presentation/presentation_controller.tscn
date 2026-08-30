@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://dyo5s8modxbdi"]
 
-[ext_resource type="Script" path="res://scenes/presentation/presentation_controller.gd" id="1_controller"]
+[ext_resource type="Script" uid="uid://foyuv6mbnf14" path="res://scenes/presentation/presentation_controller.gd" id="1_controller"]
+[ext_resource type="PackedScene" uid="uid://b1d81iwgmgv68" path="res://scenes/audio/click_randomiser.tscn" id="2_0emae"]
 
-[node name="PresentationController" type="Node"]
+[node name="PresentationController" type="Node" unique_id=374862856 node_paths=PackedStringArray("click_randomiser")]
 script = ExtResource("1_controller")
+click_randomiser = NodePath("ClickRandomiser")
+
+[node name="ClickRandomiser" parent="." unique_id=1579339688 instance=ExtResource("2_0emae")]

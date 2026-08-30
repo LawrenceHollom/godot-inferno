@@ -2,9 +2,9 @@
 
 [ext_resource type="Theme" uid="uid://b7uxclx4y81u" path="res://assets/theme/main_theme.tres" id="1_d6a2e"]
 [ext_resource type="Script" uid="uid://cqocjwwj173jf" path="res://scenes/toplevel/narrative.gd" id="2_d6a2e"]
-[ext_resource type="PackedScene" path="res://scenes/presentation/presentation_controller.tscn" id="3_pn56o"]
+[ext_resource type="PackedScene" uid="uid://dyo5s8modxbdi" path="res://scenes/presentation/presentation_controller.tscn" id="3_pn56o"]
 
-[node name="NarrativePresentation" type="Control" unique_id=2031375499 node_paths=PackedStringArray("text_top", "text_middle", "text_bottom")]
+[node name="NarrativePresentation" type="Control" unique_id=2031375499 node_paths=PackedStringArray("click_randomiser", "text_top", "text_middle", "text_bottom")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,6 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_d6a2e")
 script = ExtResource("2_d6a2e")
+click_randomiser = NodePath("")
 text_top = NodePath("HBoxContainer/VBoxContainer/TextTop")
 text_middle = NodePath("HBoxContainer/VBoxContainer/TextMiddle")
 text_bottom = NodePath("HBoxContainer/VBoxContainer/TextBottom")

@@ -24,7 +24,7 @@ static func get_medium(palette: Palette) -> Color:
 		Palette.FIRE:
 			return Color("e24c37")
 		Palette.ASH:
-			return Color("7c8477")
+			return Color("7e4f58")
 		Palette.GREEN:
 			return Color("8b9525")
 	return Color.GRAY
@@ -35,7 +35,7 @@ static func get_dark(palette: Palette) -> Color:
 		Palette.FIRE:
 			return Color("700F16")
 		Palette.ASH:
-			return Color("181d1a")
+			return Color("1a1d24")
 		Palette.GREEN:
 			return Color("2a1f07")
 	return Color.BLACK

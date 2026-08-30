@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c7d1xvff20qfl"
+path="res://.godot/imported/Né des flammes - Main Theme .ogg-e81ed1e972265174f002719be057108b.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/Né des flammes - Main Theme .ogg"
+dest_files=["res://.godot/imported/Né des flammes - Main Theme .ogg-e81ed1e972265174f002719be057108b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

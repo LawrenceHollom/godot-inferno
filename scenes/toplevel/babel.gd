@@ -35,6 +35,7 @@ var particle_target: Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GlobalState.fade_out.connect(_on_fade_out)
+	GlobalState.audio_controller.play_music()
 	room_id = []
 	time_left = GlobalState.BABEL_LIFETIME
 	book_overlay.visible = false
@@ -43,6 +44,7 @@ func _ready() -> void:
 	active_room.visible = true
 	active_room.position = Vector2.ZERO
 	inactive_room.visible = false
+	GlobalState.transition_type = GlobalState.TransitionType.SHORT
 	fire.set_intensity(0)
 	setup_room_name_labels()
 	_update_particles()
@@ -91,6 +93,7 @@ func _on_player_moved_to(pos: Vector2i) -> void:
 
 	if time_left == 0:
 		player.is_running = false
+		GlobalState.audio_controller.play_transition()
 		var tween := create_tween()
 		tween.tween_method(fire.set_intensity, 1.0, 3.0, 2.0)
 		tween.tween_callback(GlobalState.next_standard_scene)
@@ -110,6 +113,7 @@ func move_room(door_index: int) -> void:
 		label.text = ""
 	active_room.slerp_out(door_index, last_forward_door)
 	inactive_room.slerp_in(door_index, last_forward_door)
+
 	await active_room.move_finished
 
 	var tmp: BabelRoom = active_room

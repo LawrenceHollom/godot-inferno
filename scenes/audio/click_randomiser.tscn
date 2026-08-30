@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b1d81iwgmgv68"]
+
+[ext_resource type="PackedScene" uid="uid://dkatn0uup5w1a" path="res://scenes/audio/audio_randomiser.tscn" id="1_ix6sq"]
+[ext_resource type="AudioStream" uid="uid://dxglctyxcl6l1" path="res://assets/audio/hard_clicks/HardClick1.wav" id="2_tt1mb"]
+[ext_resource type="AudioStream" uid="uid://car325a3xj71s" path="res://assets/audio/hard_clicks/HardClick2.wav" id="3_gs4by"]
+[ext_resource type="AudioStream" uid="uid://3hw3n2456y53" path="res://assets/audio/hard_clicks/HardClick3.wav" id="4_urexs"]
+[ext_resource type="AudioStream" uid="uid://cg258eomdeolp" path="res://assets/audio/hard_clicks/HardClick4.wav" id="5_loiyh"]
+
+[node name="ClickRandomiser" unique_id=1579339688 instance=ExtResource("1_ix6sq")]
+streams = Array[AudioStream]([ExtResource("2_tt1mb"), ExtResource("3_gs4by"), ExtResource("4_urexs"), ExtResource("5_loiyh")])

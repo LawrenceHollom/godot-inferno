@@ -10,6 +10,8 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	overlay.visible = false
+	GlobalState.transition_type = GlobalState.TransitionType.OUTRO
+	GlobalState.audio_controller.stop_music()
 
 
 
@@ -27,9 +29,16 @@ func _on_player_moved_to(pos: Vector2i) -> void:
 func _choose_door(door: int) -> void:
 	match door:
 		0:
-			overlay.color = PaletteData.get_medium(PaletteData.Palette.ASH)
+			GlobalState.current_palette = PaletteData.Palette.ASH
 		1:
-			overlay.color = PaletteData.get_medium(PaletteData.Palette.FIRE)
+			GlobalState.current_palette = PaletteData.Palette.FIRE
 		2:
-			overlay.color = PaletteData.get_medium(PaletteData.Palette.GREEN)
+			GlobalState.current_palette = PaletteData.Palette.GREEN
 	overlay.visible = true
+	overlay.color = PaletteData.get_medium(GlobalState.current_palette)
+	player.is_running = false
+	await get_tree().create_timer(0.3).timeout
+
+	# No messing around, just straight to fade_out
+	GlobalState.on_fade_out_finished()
+	GlobalState.audio_controller.play_transition()

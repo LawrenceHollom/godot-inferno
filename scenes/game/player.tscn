@@ -1,8 +1,14 @@
 [gd_scene format=3 uid="uid://bg55h5hk06yg8"]
 
 [ext_resource type="Script" uid="uid://j8nj3pm2r1da" path="res://scenes/game/player.gd" id="1_dd427"]
+[ext_resource type="PackedScene" uid="uid://dkatn0uup5w1a" path="res://scenes/audio/audio_randomiser.tscn" id="2_t8yk2"]
+[ext_resource type="AudioStream" uid="uid://b1u38nipbelq0" path="res://assets/audio/soft_clicks/soft_click1.wav" id="3_m5ugi"]
+[ext_resource type="AudioStream" uid="uid://c5bb0egcim70x" path="res://assets/audio/soft_clicks/soft_click2.wav" id="4_3vq1g"]
+[ext_resource type="AudioStream" uid="uid://b2l6g0r20670a" path="res://assets/audio/soft_clicks/soft_click3.wav" id="5_bnwh7"]
+[ext_resource type="AudioStream" uid="uid://da61ctd4e16qr" path="res://assets/audio/soft_clicks/soft_click4.wav" id="6_dsw4c"]
+[ext_resource type="AudioStream" uid="uid://dwgeoado4fppl" path="res://assets/audio/soft_clicks/soft_click5.wav" id="7_0eoyi"]
 
-[node name="Player" type="Control" unique_id=427023341]
+[node name="Player" type="Control" unique_id=427023341 node_paths=PackedStringArray("step_randomiser")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,6 +16,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dd427")
+step_randomiser = NodePath("AudioRandomiser")
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=284475060]
 custom_minimum_size = Vector2(16, 16)
@@ -22,3 +29,6 @@ offset_bottom = 40.0
 layout_mode = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CenterContainer/Control" unique_id=445843541]
+
+[node name="AudioRandomiser" parent="." unique_id=1579339688 instance=ExtResource("2_t8yk2")]
+streams = Array[AudioStream]([ExtResource("3_m5ugi"), ExtResource("4_3vq1g"), ExtResource("5_bnwh7"), ExtResource("6_dsw4c"), ExtResource("7_0eoyi")])

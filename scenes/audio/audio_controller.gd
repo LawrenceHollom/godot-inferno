@@ -1,12 +1,15 @@
 extends Node
 
+class_name AudioController
+
 @export var music: AudioStreamPlayer
+@export var transition: AudioStreamPlayer
 
 var master_bus_index: int = AudioServer.get_bus_index("Master")
 var music_bus_index: int = AudioServer.get_bus_index("Music")
 var sfx_bus_index: int = AudioServer.get_bus_index("Sfx")
 
-var has_music_started: bool
+var has_music_started: bool = false
 
 var master_volume: float = 0.67:
 	set(value):
@@ -32,7 +35,7 @@ var sfx_volume: float = 0.67:
 const SILENT: float = -1000
 const NORMAL_POWER: float = 1
 const SILENT_POWER: float = 0
-const FADE_DURATION: float = 1.0
+const FADE_DURATION: float = 0.2
 
 
 func get_db(volume: float) -> float:
@@ -40,11 +43,6 @@ func get_db(volume: float) -> float:
 		return -10000
 	else:
 		return (volume * 30) - 20
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	has_music_started = true
 
 
 func set_power(stream: AudioStreamPlayer, power: float) -> void:
@@ -63,12 +61,18 @@ func stop_music() -> void:
 
 
 func play_music() -> void:
+	if has_music_started:
+		return
 	music.play()
 	has_music_started = true
 	var lambda: Callable = func (power: float) -> void:
 		set_power(music, power)
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_method(lambda, SILENT_POWER, NORMAL_POWER, FADE_DURATION)
+
+
+func play_transition() -> void:
+	transition.play()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

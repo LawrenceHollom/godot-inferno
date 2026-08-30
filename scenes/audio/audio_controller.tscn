@@ -1,9 +1,19 @@
 [gd_scene format=3 uid="uid://c6jhmmicrsust"]
 
 [ext_resource type="Script" uid="uid://cd6mbuwvjm5tf" path="res://scenes/audio/audio_controller.gd" id="1_fggnm"]
+[ext_resource type="AudioStream" uid="uid://c7d1xvff20qfl" path="res://assets/audio/Né des flammes - Main Theme .ogg" id="2_spm74"]
+[ext_resource type="AudioStream" uid="uid://7ot3cinhsgpm" path="res://assets/audio/Transition Sound 2.ogg" id="3_8j70j"]
 
-[node name="AudioController" type="Node" unique_id=1336390977 node_paths=PackedStringArray("music")]
+[node name="AudioController" type="Node" unique_id=1336390977 node_paths=PackedStringArray("music", "transition")]
 script = ExtResource("1_fggnm")
 music = NodePath("Music")
+transition = NodePath("Transition")
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=496624055]
+stream = ExtResource("2_spm74")
+bus = &"Music"
+parameters/looping = true
+
+[node name="Transition" type="AudioStreamPlayer" parent="." unique_id=886553550]
+stream = ExtResource("3_8j70j")
+bus = &"Sfx"

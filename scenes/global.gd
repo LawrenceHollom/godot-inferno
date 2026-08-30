@@ -19,12 +19,13 @@ const NARRATIVE: Array[String] = ["PAST", "ASHES"]
 
 @export var room_namer: RoomNamer
 @export var book_controller: BookController
+@export var audio_controller: AudioController
 
 var narrative_index: int = 0
 var narrative_data: Dictionary[String, NarrativeData] = {}
 
 var current_palette: PaletteData.Palette = PaletteData.Palette.FIRE
-var next_palette: PaletteData.Palette = PaletteData.Palette.FIRE
+var next_palette: PaletteData.Palette = PaletteData.Palette.ASH
 
 enum CurrentScene {
 	INTRO,
@@ -32,6 +33,15 @@ enum CurrentScene {
 	NARRATIVE,
 	CONCLUSION,
 }
+
+enum TransitionType {
+	INTRO,
+	LONG,
+	SHORT,
+	OUTRO,
+}
+
+var transition_type: TransitionType = TransitionType.INTRO
 
 # Emitted when the current scene should end and fade out in whatever way
 signal fade_out
@@ -118,6 +128,7 @@ func on_transition_finished() -> void:
 	match state:
 		CurrentScene.INTRO:
 			get_tree().change_scene_to_file("res://scenes/toplevel/narrative.tscn")
+			transition_type = TransitionType.LONG
 		CurrentScene.BABEL:
 			get_tree().change_scene_to_file("res://scenes/toplevel/babel.tscn")
 		CurrentScene.NARRATIVE:

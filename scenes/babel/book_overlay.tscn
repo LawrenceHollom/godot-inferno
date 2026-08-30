@@ -6,12 +6,14 @@
 [ext_resource type="Texture2D" uid="uid://cbtp0hbn658bc" path="res://assets/game/shelf.png" id="3_btenm"]
 [ext_resource type="PackedScene" uid="uid://dfhglkmdsooq8" path="res://scenes/babel/book.tscn" id="4_x6clb"]
 [ext_resource type="Texture2D" uid="uid://dqeisfsm0ricb" path="res://assets/game/highlight.png" id="5_wlyd0"]
+[ext_resource type="PackedScene" uid="uid://b1d81iwgmgv68" path="res://scenes/audio/click_randomiser.tscn" id="7_ympl5"]
+[ext_resource type="AudioStream" uid="uid://208sm88c72ka" path="res://assets/audio/sand.wav" id="8_kgjc1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_btenm"]
 line_spacing = -2.0
 font_color = Color(0.4392157, 0.05882353, 0.08627451, 1)
 
-[node name="BookOverlay" type="Control" unique_id=1540440884 node_paths=PackedStringArray("shelf_root", "highlight", "book_container", "book_text", "page_count")]
+[node name="BookOverlay" type="Control" unique_id=1540440884 node_paths=PackedStringArray("shelf_root", "highlight", "book_container", "book_text", "page_count", "click_randomiser", "open_close_sound", "page_sound")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,6 +27,9 @@ highlight = NodePath("Highlight")
 book_container = NodePath("BookContainer")
 book_text = NodePath("BookContainer/Background/HBoxContainer/VBoxContainer/Text")
 page_count = NodePath("BookContainer/Background/HBoxContainer/VBoxContainer/PageCount")
+click_randomiser = NodePath("ClickRandomiser")
+open_close_sound = NodePath("OpenClosePlayer")
+page_sound = NodePath("PageSound")
 
 [node name="ShelfContainer" type="CenterContainer" parent="." unique_id=1132713331]
 layout_mode = 1
@@ -248,3 +253,12 @@ theme_override_colors/font_color = Color(0.4392157, 0.05882353, 0.08627451, 1)
 text = "1/1"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ClickRandomiser" parent="." unique_id=1579339688 instance=ExtResource("7_ympl5")]
+volume_db = -6.0
+
+[node name="OpenClosePlayer" type="AudioStreamPlayer" parent="." unique_id=285478867]
+stream = ExtResource("8_kgjc1")
+
+[node name="PageSound" type="AudioStreamPlayer" parent="." unique_id=1243688765]
+stream = ExtResource("8_kgjc1")

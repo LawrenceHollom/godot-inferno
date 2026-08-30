@@ -11,6 +11,10 @@ const ANIMATION_DURATION: float = 0.12
 @export var room_code: String = "0"
 @export var case_number: int = 0
 
+@export var click_randomiser: AudioRandomiser
+@export var open_close_sound: AudioStreamPlayer
+@export var page_sound: AudioStreamPlayer
+
 ## All books in shelf order, with each shelf ordered left to right.
 var books: Array[Book] = []
 var shelves: Array[Array] = []
@@ -82,6 +86,7 @@ func _unhandled_input(event: InputEvent) -> void:
 ## Updates the room used for every book's deterministic text and image choices.
 ## This may be called before or after the overlay enters the scene tree.
 func configure(new_room_code: String, new_case_number: int) -> void:
+	open_close_sound.play()
 	room_code = new_room_code
 	case_number = new_case_number
 	selected_shelf_number = 0
@@ -147,21 +152,16 @@ func _move_highlight(direction: Vector2i) -> void:
 		return
 
 	if direction.y != 0:
-		selected_shelf_number = clampi(
-			selected_shelf_number + direction.y,
-			0,
-			shelves.size() - 1,
-		)
-		selected_book_number = mini(
-			selected_book_number,
-			shelves[selected_shelf_number].size() - 1,
-		)
+		var start_shelf := selected_shelf_number
+		selected_shelf_number = clampi(selected_shelf_number + direction.y, 0, shelves.size() - 1)
+		selected_book_number = mini(selected_book_number, shelves[selected_shelf_number].size() - 1)
+		if selected_shelf_number != start_shelf:
+			click_randomiser.play_random_stream()
 	elif direction.x != 0:
-		selected_book_number = clampi(
-			selected_book_number + direction.x,
-			0,
-			shelves[selected_shelf_number].size() - 1,
-		)
+		var start_book := selected_book_number
+		selected_book_number = clampi(selected_book_number + direction.x, 0, shelves[selected_shelf_number].size() - 1)
+		if selected_book_number != start_book:
+			click_randomiser.play_random_stream()
 
 	_update_highlight()
 
@@ -201,6 +201,7 @@ func _open_selected_book() -> void:
 		selected_book.book_number,
 		selected_book.case_number,
 	)
+	page_sound.play()
 	highlight.hide()
 	book_container.show()
 	book_pages = _paginate_text(full_text)
@@ -222,9 +223,11 @@ func _close_book() -> void:
 	highlight.show()
 	_update_highlight()
 	input_locked = false
+	page_sound.play()
 
 
 func _close_overlay() -> void:
+	open_close_sound.play()
 	input_locked = true
 	_set_center_pivot(self)
 	_stop_active_tween()
@@ -269,9 +272,12 @@ func _stop_active_tween() -> void:
 
 
 func _change_page(direction: int) -> void:
+	var start_page := current_page
 	if book_pages.is_empty():
 		return
 	current_page = clampi(current_page + direction, 0, book_pages.size() - 1)
+	if current_page != start_page:
+		page_sound.play()
 	_show_current_page()
 
 

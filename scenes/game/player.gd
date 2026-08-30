@@ -5,6 +5,7 @@ class_name Player
 @export var start_pos := Vector2i.ZERO
 
 @export var room_layout: RoomLayout
+@export var step_randomiser: AudioRandomiser
 
 @export_range(0.1, 30.0, 0.1, "suffix:fps") var idle_animation_fps := 4.0
 
@@ -106,5 +107,6 @@ func move_on_grid(direction: Vector2i) -> void:
 		interacted_with.emit(target)
 		return
 
+	step_randomiser.play_random_stream()
 	set_grid_position(target)
 	moved_to.emit(target)

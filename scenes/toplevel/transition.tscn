@@ -6,8 +6,21 @@
 [ext_resource type="Texture2D" uid="uid://cx4hqmvotkt55" path="res://assets/backgrounds/eye_half.png" id="4_4w86k"]
 [ext_resource type="Texture2D" uid="uid://btxowiuw1qgwx" path="res://assets/backgrounds/eye_closed.png" id="5_ugxdq"]
 [ext_resource type="Texture2D" uid="uid://8nx7ocbx0cdn" path="res://assets/backgrounds/tower_of_babel.png" id="6_003ll"]
+[ext_resource type="Texture2D" uid="uid://t5uq55bva5c0" path="res://assets/backgrounds/Death_far.png" id="6_xfi4b"]
+[ext_resource type="Texture2D" uid="uid://jfkisehbis21" path="res://assets/backgrounds/Death_mid.png" id="7_8ocmm"]
 [ext_resource type="Texture2D" uid="uid://d3tmvdyynbkkj" path="res://assets/backgrounds/tree.png" id="7_xfi4b"]
 [ext_resource type="Texture2D" uid="uid://d3lnhx36odyjv" path="res://assets/backgrounds/flowers.png" id="8_4w86k"]
+[ext_resource type="Texture2D" uid="uid://bby0aoge76mi6" path="res://assets/backgrounds/Death_close.png" id="8_yx6it"]
+[ext_resource type="Shader" uid="uid://tarbb3hyrdp1" path="res://scripts/palette_swap.gdshader" id="9_palette"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_palette"]
+shader = ExtResource("9_palette")
+shader_parameter/source_light = Color(1, 0.92549, 0.81569, 1)
+shader_parameter/source_medium = Color(0.88627, 0.29804, 0.21569, 1)
+shader_parameter/source_dark = Color(0.43922, 0.05882, 0.08627, 1)
+shader_parameter/target_light = Color(1, 0.92549, 0.81569, 1)
+shader_parameter/target_medium = Color(0.88627, 0.29804, 0.21569, 1)
+shader_parameter/target_dark = Color(0.43922, 0.05882, 0.08627, 1)
 
 [node name="Transition" type="Control" unique_id=435532729 node_paths=PackedStringArray("colour_rect", "texture_rect", "label")]
 layout_mode = 3
@@ -22,6 +35,7 @@ colour_rect = NodePath("ColorRect")
 texture_rect = NodePath("TextureRect")
 label = NodePath("Label")
 eyes = Array[Texture2D]([ExtResource("3_4w86k"), ExtResource("4_4w86k"), ExtResource("5_ugxdq")])
+death = Array[Texture2D]([ExtResource("6_xfi4b"), ExtResource("7_8ocmm"), ExtResource("8_yx6it")])
 babel = ExtResource("6_003ll")
 tree = ExtResource("7_xfi4b")
 flower = ExtResource("8_4w86k")
@@ -42,12 +56,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.9254902, 0.8156863, 1)
 theme_override_font_sizes/font_size = 80
 text = "INFERNO"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1452222502]
+material = SubResource("ShaderMaterial_palette")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
